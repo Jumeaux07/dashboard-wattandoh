@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\Dashboard\Admin;
 
+
+use App\Models\Annonceur;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserActivity;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
 
-class AdministrateurController extends Controller
-{
-    public function __construct()
+class AnnonceurController extends Controller
+{ public function __construct()
     {
         $this->middleware('admin');
 
         View::share("module","Module utilisateur");
         View::share("title","Gestion des utilisateurs");
-        View::share( 'section_title', "Liste des administrateur" );
+
         View::share( 'menu', "Utilisateurs" );
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,16 +29,17 @@ class AdministrateurController extends Controller
      */
     public function index()
     {
-        $data['subtitle'] = "Liste des administrateurs";
+        //
+        $data['subtitle'] = "Liste des annonceurs";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module Utilisateur ";
-        $action = " a consulté la liste des administrateurs ";
+        $action = " a consulté la liste des annonceurs";
         UserActivity::saveActivity($module,$action);
 
-        $data['administrateurs'] = User::where('role_id',1)->get();
+        $data['annonceurs'] = Annonceur::all();
 
-        return view('administrateurs.index',$data);
+        return view('annonceurs.index',$data);
     }
 
     /**
@@ -47,15 +49,16 @@ class AdministrateurController extends Controller
      */
     public function create()
     {
-        $data['subtitle'] = "Création d'un administrateur";
+        //
+        $data['subtitle'] = "Création d'un annonceur";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";
-        $action = " a affiché la page de création d'un administrateur";
+        $action = " a affiché la page de création d'un annonceurs";
 
         UserActivity::saveActivity($module,$action);
 
-        return view('administrateurs.create',$data);
+        return view('annonceurs.create',$data);
     }
 
     /**
@@ -66,11 +69,12 @@ class AdministrateurController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $validator = Validator::make($request->all(),[
             'nom_prenoms' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'telephone' => 'required|min:10',
-            'adresse' => 'required',
+            'phone1' => 'required|min:10',
+            'phone2' => 'required|min:10',
+            'sexe' => 'required',
             'password' => 'required|string|min:7',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -81,28 +85,28 @@ class AdministrateurController extends Controller
             return back()->withErrors($validator->errors())->withInput($request->input());
         }
 
-        $administrateur = new User();
-        $administrateur->nom_prenoms = htmlspecialchars($request->nom_prenoms);
-        $administrateur->email = htmlspecialchars($request->email);
-        $administrateur->telephone = htmlspecialchars($request->telephone);
-        $administrateur->adresse = htmlspecialchars($request->adresse);
-        $administrateur->password = Hash::make($request->password);
-        $administrateur->role_id = 1;
-        $administrateur->statut_generique_id = 2;
-        $administrateur->created_by = auth()->user()->nom_prenoms;
+        $annonceur = new Annonceur();
+        $annonceur->nom_prenoms = htmlspecialchars($request->nom_prenoms);
+        $annonceur->phone1 = htmlspecialchars($request->phone1);
+        $annonceur->phone2 = htmlspecialchars($request->phone2);
+        $annonceur->sexe = htmlspecialchars($request->sexe);
+        $annonceur->password = Hash::make($request->password);
+        // $annonceur->role_id = 1;
+        $annonceur->statut_generique_id = 2;
+        $annonceur->created_by = auth()->user()->nom_prenoms;
 
-        if($administrateur->save()){
+        if($annonceur->save()){
             //pour l'activité méné par l'utilisateur connecté
             $module = "Module utilisateur";
-            $action = " a créé l'administrateur : $administrateur->nom_prenoms ";
+            $action = " a créé l'annonceur : $annonceur->nom_prenoms ";
 
             UserActivity::saveActivity($module,$action);
             session()->flash('type','alert-success');
-            session()->flash('message','Administrateur créé avec succès');
-            return redirect()->route('administrateurs.index');
+            session()->flash('message','Annonceur créé avec succès');
+            return redirect()->route('annonceurs.index');
         }else{
             session()->flash('type','alert-danger');
-            session()->flash('message','La création d\'un administrateur a échoué');
+            session()->flash('message','La création d\'un annonceur a échoué');
             return back()->withInput($request->input());
         }
     }
@@ -115,20 +119,21 @@ class AdministrateurController extends Controller
      */
     public function show($id)
     {
-        $data['administrateur'] = User::find($id);
+        //
+        $data['annonceur'] = Annonceur::find($id);
         $data['subtitle'] = "Detail utilisateur";
 
-        if($data['administrateur'] != null){
+        if($data['annonceur'] != null){
             //pour l'activité méné par l'utilisateur connecté
             $module = "Module utilisateur";
-            $action = " a affiché la page de detail d'un administrateur : {{$data['administrateur']->nom_prenoms}} ";
+            $action = " a affiché la page de detail d'un annonceur : {{$data['annonceur']->nom_prenoms}} ";
             UserActivity::saveActivity($module,$action);
 
-            return view('administrateurs.show', $data);
+            return view('annonceurs.show', $data);
         }else{
             session()->flash('type','alert-danger');
-            session()->flash('message',"Administrateur introuvable");
-            return redirect()->route('administrateurs.index');
+            session()->flash('message',"Annonceur introuvable");
+            return redirect()->route('annonceurs.index');
         }
     }
 
@@ -140,15 +145,16 @@ class AdministrateurController extends Controller
      */
     public function edit($id)
     {
-        $data['administrateur'] = User::find($id);
+        //
+        $data['annonceur'] = Annonceur::find($id);
         $data['subtitle'] = "Modification d'un utilisateur";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";
-        $action = " a affiché la page de modification d'un administrateur ";
+        $action = " a affiché la page de modification d'un annonceur ";
         UserActivity::saveActivity($module,$action);
 
-        return view('administrateurs.edit', $data);
+        return view('annonceurs.edit', $data);
     }
 
     /**
@@ -160,11 +166,12 @@ class AdministrateurController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         $validator = Validator::make($request->all(),[
             'nom_prenoms' => 'required',
-            'email' => 'required|email',
-            'telephone' => 'required|min:10',
-            'adresse' => 'required',
+            'phone1' => 'required|min:10',
+            'phone2' => 'required|min:10',
+            'sexe' => 'required',
         ]);
 
         if($validator->fails()){
@@ -173,29 +180,29 @@ class AdministrateurController extends Controller
             return back()->withErrors($validator->errors())->withInput($request->input());
         }
 
-        $administrateur = User::find($id);
+        $annonceur = Annonceur::find($id);
 
 
-        if(!$administrateur){
+        if(!$annonceur){
             session()->flash('type','alert-danger');
-            session()->flash('message','Administrateur introuvable');
+            session()->flash('message','Annonceur introuvable');
             return back();
         }else{
-            $administrateur->nom_prenoms =  htmlspecialchars($request->nom_prenoms);
-            $administrateur->email =  htmlspecialchars($request->email);
-            $administrateur->telephone =  htmlspecialchars($request->telephone);
-            $administrateur->adresse =  htmlspecialchars($request->adresse);
+            $annonceur->nom_prenoms =  htmlspecialchars($request->nom_prenoms);
+            $annonceur->phone1 =  htmlspecialchars($request->phone1);
+            $annonceur->phone2 =  htmlspecialchars($request->phone2);
+            $annonceur->sexe =  htmlspecialchars($request->sexe);
 
-            if($administrateur->save()){
+            if($annonceur->save()){
                 session()->flash('type','alert-success');
-                session()->flash('message','Les informations de l\'administrateur ont bien été modifiées');
+                session()->flash('message','Les informations de l\'annonceur ont bien été modifiées');
 
                 //pour l'activité méné par l'utilisateur connecté
                 $module = "Module utilisateur";
-                $action = " a modifié les information d'un administrateur ";
+                $action = " a modifié les information d'un annonceur ";
                 UserActivity::saveActivity($module,$action);
 
-                return redirect()->route('administrateurs.show', $administrateur->id);
+                return redirect()->route('annonceurs.show', $annonceur->id);
             }else{
                 session()->flash('type','alert-danger');
                 session()->flash('message','Une erreur s\'est produite lors de la modification');
@@ -213,27 +220,25 @@ class AdministrateurController extends Controller
     {
         //
     }
-
-    // Activation ou desactivation de compte
-    public function changeStatut( $id){
-        $administateur = User::find($id);
-        if (!$administateur){
+    public function statutA( $id){
+        $annonceur = Annonceur::find($id);
+        if (!$annonceur){
             session()->flash('type', 'alert-danger');
-            session()->flash('message', 'L\'administrateur est introuvable.');
+            session()->flash('message', 'L\'annonceur est introuvable.');
             return back();
         }
         $module = 'Module utilisateur';
 
-        if ($administateur->statut_generique_id == 2){
-            $administateur->statut_generique_id = 1;
-            $action = " a désactivé un administrateur : {{$administateur->nom_prenoms}}." ;
-            session()->flash('message', 'L\'administrateur a bien été désactivé.');
+        if ($annonceur->statut_generique_id == 2){
+            $annonceur->statut_generique_id = 1;
+            $action = " a désactivé un annonceur : {{$annonceur->nom_prenoms}}." ;
+            session()->flash('message', 'L\'annonceur a bien été désactivé.');
         }else{
-            $administateur->statut_generique_id = 2;
-            $action = " a procédé à la l'activation l'administrateur : {{$administateur->nom_prenoms}}." ;
-            session()->flash('message', 'L\'administrateur a bien été activé.');
+            $annonceur->statut_generique_id = 2;
+            $action = " a procédé à la l'activation l'annonceur : {{$annonceur->nom_prenoms}}." ;
+            session()->flash('message', 'L\'annonceur a bien été activé.');
         }
-        $administateur->save();
+        $annonceur->save();
 
         UserActivity::saveActivity($module,$action);
         session()->flash('type', 'alert-success');
