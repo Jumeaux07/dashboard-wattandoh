@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
-                <a href="{{route('administrateurs.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un administrateur</button></a>
+                <a href="{{route('annonceurs.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un annonceur</button></a>
             </div>
         </div>
     </div>
@@ -35,27 +35,27 @@
                         <thead>
                         <tr>
                             <th>Nom & prénoms</th>
-                            <th>Email</th>
-                            <th>Téléphone</th>
-                            <th>Adresse</th>
+                            <th>Telephone 1</th>
+                            <th>Téléphone 2</th>
+                            <th>Sexe</th>
                             <th>Statut</th>
                             <th>Date de creation</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($administrateurs as $administrateur)
+                            @foreach ($annonceurs as $annonceur)
                                 <tr>
-                                    <td>{{$administrateur->nom_prenoms}}</td>
-                                    <td>{{$administrateur->email}}</td>
-                                    <td>{{$administrateur->telephone}}</td>
-                                    <td>{{$administrateur->adresse}}</td>
-                                    @if ($administrateur->statut_generique_id == 2)
+                                    <td>{{$annonceur->nom_prenoms}}</td>
+                                    <td>{{$annonceur->phone1}}</td>
+                                    <td>{{$annonceur->phone2}}</td>
+                                    <td>{{$annonceur->sexe}}</td>
+                                    @if ($annonceur->statut_generique_id == 2)
                                         <td><span class="badge badge-success">Actif</span></td>
-                                    @elseif ($administrateur->statut_generique_id == 1)
+                                    @elseif ($annonceur->statut_generique_id == 1)
                                         <td><span class="badge badge-danger">Désactivé</span></td>
                                     @endif
-                                    <td>{{date('d-m-Y à H:i', strtotime($administrateur->created_at))}}</td>
+                                    <td>{{date('d-m-Y à H:i', strtotime($annonceur->created_at))}}</td>
                                     <td>
                                         <div class="single-dropdown">
                                             <div class="dropdown">
@@ -65,13 +65,13 @@
                                                 </button>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('administrateurs.show',$administrateur->id )}}"> <i class="feather icon-eye"></i> Voir</a>
-                                                    <a class="dropdown-item" href="{{route('administrateurs.edit', $administrateur->id)}}"> <i class="feather icon-edit" ></i> Modifier</a>
-                                                    @if ($administrateur->statut_generique_id == 2)
-                                                    <a class="dropdown-item" href="{{route('administrateur.changeStatut',$administrateur->id )}}"> <i class="fa fa-toggle-off"></i> Desactiver</a>
+                                                    <a class="dropdown-item" href="{{route('annonceurs.show',$annonceur->id )}}"> <i class="feather icon-eye"></i> Voir</a>
+                                                    <a class="dropdown-item" href="{{route('annonceurs.edit', $annonceur->id)}}"> <i class="feather icon-edit" ></i> Modifier</a>
+                                                    @if ($annonceur->statut_generique_id == 2)
+                                                    <a class="dropdown-item" href="{{route('annonceur.statutA',$annonceur->id )}}"> <i class="fa fa-toggle-off"></i> Desactiver</a>
                                                     @endif
-                                                    @if ($administrateur->statut_generique_id == 1)
-                                                    <a class="dropdown-item" href="{{route('administrateur.changeStatut',$administrateur->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
+                                                    @if ($annonceur->statut_generique_id == 1)
+                                                    <a class="dropdown-item" href="{{route('annonceur.statutA',$annonceur->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
                                                     @endif
                                                 </div>
                                             </div>

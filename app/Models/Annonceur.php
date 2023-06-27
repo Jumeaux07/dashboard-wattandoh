@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Annonceur extends Authenticatable implements JWTSubject
+class Annonceur extends Model
 {
     use HasApiTokens, HasFactory, SoftDeletes,  Notifiable;
 

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Client extends Authenticatable implements JWTSubject
+class Client extends Model
 {
     use HasFactory, SoftDeletes ;
 

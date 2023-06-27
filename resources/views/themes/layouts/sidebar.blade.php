@@ -26,8 +26,8 @@
 
                     <ul class="vertical-submenu">
                         <li><a href="{{Route('administrateurs.index')}}">Administrateurs</a></li>
-                        <li><a href="#">Annonceurs</a></li>
-                        <li><a href="#">Clients</a></li>
+                        <li><a href="{{Route('annonceurs.index')}}">Annonceurs</a></li>
+                        <li><a href="{{Route('clients.index')}}">Clients</a></li>
                         <li><a href="#">Gestionnaires</a></li>
                     </ul>
                 </li>
