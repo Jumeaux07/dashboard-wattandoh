@@ -75,6 +75,7 @@ class AnnonceurController extends Controller
             'phone1' => 'required|min:10',
             'phone2' => 'required|min:10',
             'sexe' => 'required',
+            'parrain' => 'required',
             'password' => 'required|string|min:7',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -90,9 +91,13 @@ class AnnonceurController extends Controller
         $annonceur->phone1 = htmlspecialchars($request->phone1);
         $annonceur->phone2 = htmlspecialchars($request->phone2);
         $annonceur->sexe = htmlspecialchars($request->sexe);
+        $annonceur->parrain = htmlspecialchars($request->parrain);
+
+        // $annonceur->parrain = boolValue($request->parrain);
         $annonceur->password = Hash::make($request->password);
         // $annonceur->role_id = 1;
         $annonceur->statut_generique_id = 2;
+        // $annonceur->statut_generique_id = 4;
         $annonceur->created_by = auth()->user()->nom_prenoms;
 
         if($annonceur->save()){
@@ -172,6 +177,7 @@ class AnnonceurController extends Controller
             'phone1' => 'required|min:10',
             'phone2' => 'required|min:10',
             'sexe' => 'required',
+            'parrain' => 'required',
         ]);
 
         if($validator->fails()){
@@ -192,6 +198,7 @@ class AnnonceurController extends Controller
             $annonceur->phone1 =  htmlspecialchars($request->phone1);
             $annonceur->phone2 =  htmlspecialchars($request->phone2);
             $annonceur->sexe =  htmlspecialchars($request->sexe);
+            $annonceur->parrain =  htmlspecialchars($request->parrain);
 
             if($annonceur->save()){
                 session()->flash('type','alert-success');
@@ -244,4 +251,6 @@ class AnnonceurController extends Controller
         session()->flash('type', 'alert-success');
         return redirect()->back();
     }
+
+
 }

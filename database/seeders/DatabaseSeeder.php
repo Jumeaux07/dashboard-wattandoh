@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+
+use App\Models\TypeDeMarche;
+use Database\Seeders\OtpSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
@@ -10,11 +13,14 @@ use Database\Seeders\BudgetSeeder;
 use Database\Seeders\ClientSeeder;
 use Database\Seeders\MarcheSeeder;
 use Database\Seeders\CommuneSeeder;
+use Database\Seeders\RapportSeeder;
+use Database\Seeders\InterditSeeder;
 use Database\Seeders\QuartierSeeder;
 use Database\Seeders\AnnonceurSeeder;
 use Database\Seeders\RendezvousSeeder;
 use Database\Seeders\TypeDeBienSeeder;
 use Database\Seeders\PublicationSeeder;
+use Database\Seeders\TypeDeMarcheSeeder;
 use Database\Seeders\UserActivitySeeder;
 use Database\Seeders\StatutGenerateSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,20 +35,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            StatutGenerateSeeder::class,
-            CommuneSeeder::class,
+
+
+            InterditSeeder::class,
             RoleSeeder::class,
+            StatutGenerateSeeder::class,
+            UserActivitySeeder::class,
+            TypeDeMarcheSeeder::class,
             UserSeeder::class,
+            TypeDeBienSeeder::class,
+            CommuneSeeder::class,
             BudgetSeeder::class,
             QuartierSeeder::class,
-            ClientSeeder::class,
             AnnonceurSeeder::class,
-            TypeDeBienSeeder::class,
+            ClientSeeder::class,
             PublicationSeeder::class,
+            ImageSeeder::class,
             RendezvousSeeder::class,
             MarcheSeeder::class,
-            UserActivitySeeder::class,
-            ImageSeeder::class,
+            OtpSeeder::class,
+            RapportSeeder::class,
+
         ]);
     }
 }

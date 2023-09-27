@@ -47,5 +47,15 @@ class UserSeeder extends Seeder
             'created_by'=>"Wattandoh",
             'role_id'=>1,
         ]);
+        DB::table('users')->insert([
+            'nom_prenoms'=>"tanguy man",
+            'email'=>"tanguy1@gmail.com",
+            'telephone'=>"0161351682",
+            'adresse'=>"Yopougon koute",
+            'password'=>Hash::make('AZERTY123'),
+            'statut_generique_id'=>1,
+            'created_by'=>"Wattandoh",
+            'role_id'=>1,
+        ]);
     }
 }

@@ -18,7 +18,13 @@ return new class extends Migration
             $table->string('reference');
             $table->integer('piece');
             $table->integer('caution');
-            $table->string('description');
+            $table->integer('loyer');
+            $table->longText('description');
+            $table->double('commission');
+            $table->unsignedBigInteger('type_de_marche_id');
+            $table->foreign('type_de_marche_id')->references('id')->on('type_de_marches')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('interdit_id');
+            $table->foreign('interdit_id')->references('id')->on('interdits')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('annonceur_id');
             $table->foreign('annonceur_id')->references('id')->on('annonceurs')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('commune_id');
@@ -28,6 +34,8 @@ return new class extends Migration
             $table->unsignedBigInteger('quartier_id')->nullable();
             $table->foreign('quartier_id')->references('id')->on('quartiers')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('statut_generique_id')->nullable();
+            $table->foreign('type_de_bien_id')->references('id')->on('type_de_biens')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('type_de_bien_id')->nullable();
             $table->foreign('statut_generique_id')->references('id')->on('statut_generiques')->onDelete('cascade')->onUpdate('cascade');
             $table->string('created_by');
             $table->softDeletes();

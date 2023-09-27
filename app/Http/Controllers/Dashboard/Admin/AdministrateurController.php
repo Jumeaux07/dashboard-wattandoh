@@ -18,7 +18,7 @@ class AdministrateurController extends Controller
 
         View::share("module","Module utilisateur");
         View::share("title","Gestion des utilisateurs");
-        View::share( 'section_title', "Liste des administrateur" );
+        // View::share( 'section_title', "Liste des administrateur" );
         View::share( 'menu', "Utilisateurs" );
     }
     /**

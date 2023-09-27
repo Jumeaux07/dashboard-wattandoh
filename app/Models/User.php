@@ -7,14 +7,17 @@ use App\Models\Client;
 use App\Models\Annonceur;
 use App\Models\StatutGenerique;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Foundation\Auth\User;
+// use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends  Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes ;
 

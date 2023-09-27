@@ -51,10 +51,10 @@
                     <p>
                         <a href="{{route('administrateurs.edit',$administrateur->id)}}"><button class="btn btn-primary"><i class="feather icon-edit" ></i> <strong>Editer</strong> </button></a>
                         @if ($administrateur->statut_generique_id == 2)
-                        <a href="{{route('administateur.statut',$administrateur->id )}}"><button class="btn btn-danger"><i class="fa fa-toggle-off"></i> <strong>Desactiver</strong></button></a>
+                        <a href="{{route('administrateur.changeStatut',$administrateur->id )}}"><button class="btn btn-danger"><i class="fa fa-toggle-off"></i> <strong>Desactiver</strong></button></a>
                         @endif
                         @if ($administrateur->statut_generique_id == 1)
-                        <a href="{{route('administateur.statut',$administrateur->id )}}"><button class="btn btn-success"><i class="fa fa-toggle-on"></i> <strong>Activer</strong></button></a>
+                        <a href="{{route('administrateur.changestatut',$administrateur->id )}}"><button class="btn btn-success"><i class="fa fa-toggle-on"></i> <strong>Activer</strong></button></a>
                         @endif
                     </p>
                 </div>

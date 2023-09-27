@@ -22,11 +22,10 @@ class UserActivity extends Model
         $activity->user_id = Auth::user()->id;
         $activity->module = $module;
         $activity->action = $action;
-        // $activity->section = $section;
 
         $agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
-        // Detect Device/Operating System
+        // Detect Device/Operating System ( systeme d'exploitatiion )
         if (preg_match('/Linux/i', $agent)) $os = 'Linux';
         elseif (preg_match('/Mac/i', $agent)) $os = 'Mac';
         elseif (preg_match('/iPhone/i', $agent)) $os = 'iPhone';
@@ -36,13 +35,13 @@ class UserActivity extends Model
         elseif (preg_match('/Windows/i', $agent)) $os = 'Windows';
         else $os = 'Unknown';
 
-        // Browser Detection
+        // Browser Detection ( navigateur)
         if (preg_match('/Firefox/i', $agent)) $br = 'Firefox';
         elseif (preg_match('/Mac/i', $agent)) $br = 'Mac';
         elseif (preg_match('/Chrome/i', $agent)) $br = 'Chrome';
         elseif (preg_match('/Opera/i', $agent)) $br = 'Opera';
         elseif (preg_match('/MSIE/i', $agent)) $br = 'IE';
-        else $br = 'Unknown';
+        else $br = 'Unknown'; //  Unknown = Inconnue
         setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 
         $activity->pays        = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? $_SERVER['GEOIP_COUNTRY_NAME'] : '';
@@ -54,8 +53,9 @@ class UserActivity extends Model
         $activity->navigator = $br . '/' . $os;;
         $activity->navigator = $br . '/' . $os;;
         $activity->ip = (isset($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '';
+
         $activity->save();
-        //dd($activity);
+        // dd($activity);
 
         return $activity;
     }

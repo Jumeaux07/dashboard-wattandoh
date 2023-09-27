@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Models\Client;
+use App\Models\Rapport;
 use App\Models\Rendezvous;
-use App\Models\StatutGenerique;
 use App\Models\Publication;
+use App\Models\StatutGenerique;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,8 +38,12 @@ class Marche extends Model
     }
 
     public function rdv(){
-        return $this->belongsTo(Rendezvous::class);
+        return $this->belongsTo(Rendezvous::class,'rendezvous_id','id');
     }
+    public function rapports(){
+        return $this->hasMany(Rapport::class);
+    }
+
 
 
 

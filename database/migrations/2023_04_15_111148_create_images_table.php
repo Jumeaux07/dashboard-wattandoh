@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url');
             $table->unsignedBigInteger('publication_id');
             $table->foreign('publication_id')->references('id')->on('publications')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('created_by');
+            $table->string('created_by')->default('Wattandoh');
             $table->softDeletes();
             $table->timestamps();
         });

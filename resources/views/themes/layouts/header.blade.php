@@ -3,7 +3,7 @@
     <div class="row align-items-center">
         <div class="col-md-12">
             <div class="mobile-logobar">
-                <a href="index.html" class="mobile-logo"><img src="{{asset('assets/images/logo.svg')}}" class="img-fluid" alt="logo"></a>
+                <a href="#" class="mobile-logo"><img src="{{asset('assets/images/Wattandoh.png')}}" class="img-fluid" alt="logo"></a>
             </div>
             <div class="mobile-togglebar">
                 <ul class="list-inline mb-0">
@@ -118,13 +118,19 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profilelink">
                                     <div class="dropdown-item">
                                         <div class="profilename">
-                                          <h5>John Doe</h5>
+                                          {{-- <h5>{{Auth::guard('logout.admin')->user()->name}}</h5>
+                                          ;::guard('themes')->user()->nom_prenoms --}}
+                                          <h5>{{Auth::guard()->user()->nom_prenoms}}</h5>
+                                          {{-- <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Administrateur</span></div>
+                                           --}}
+
                                         </div>
+
                                     </div>
                                     <div class="userbox">
                                         <ul class="list-unstyled mb-0">
                                             <li class="media dropdown-item">
-                                                <a href="#" class="profile-icon"><img src="{{asset('assets/images/svg-icon/user.svg')}}" class="img-fluid" alt="user">My Profile</a>
+                                                <a href="#" class="profile-icon"><img src="{{asset('assets/images/svg-icon/user.svg')}}" class="img-fluid" alt="user">Mon  Profil</a>
                                             </li>
                                             <li class="media dropdown-item">
                                                 <a href="#" class="profile-icon"><img src="{{asset('assets/images/svg-icon/email.svg')}}" class="img-fluid" alt="email">Email</a>

@@ -16,6 +16,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
+            // 'statut' => 0,
             'libelle' => 'Super adminstrateur',
             'created_by' => 'Wattandoh'
         ]);
