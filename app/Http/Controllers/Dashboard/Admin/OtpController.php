@@ -104,7 +104,7 @@ class OtpController extends Controller
     {
         //
         $data['otp'] = Otp::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail otp";
         if ($data['otp'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher le otp : {{$data['otp']->code}}";
@@ -127,7 +127,7 @@ class OtpController extends Controller
     {
         //
         $data['otp'] = Otp::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un otp";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

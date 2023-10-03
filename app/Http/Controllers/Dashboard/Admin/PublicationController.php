@@ -76,6 +76,12 @@ class PublicationController extends Controller
         $typedemarches = TypeDeMarche::all();
         $interdits = Interdit::all();
         $typedebiens = TypeDeBien::all();
+        //   $communeId =  $request-> input('commune');
+        // $quartiers = Quartier::where('commune_id', $communeId)->get();
+        // return view('publications.create',[
+        //     'communes' => Commune::all(),
+        //     'quartiers' => $quartiers,
+        // ]);
 
         return view('publications.create',$data,
         //   [
@@ -121,7 +127,7 @@ class PublicationController extends Controller
             session()->flash('message','Erreur dans le formulaire');
             return back()->withErrors($validator->errors())->withInput($request->input());
         }
-
+        // $interdits = $request->input('interdits');
         $publication = new Publication();
         $publication->reference = htmlspecialchars($request->reference);// ici le travail demande par rapport a rendre la reference automatique
 
@@ -143,7 +149,8 @@ class PublicationController extends Controller
         $publication->quartier_id = $request -> quartier_id;
         $publication->type_de_marche_id = $request -> type_de_marche_id;
         $publication->interdit_id= $request -> interdit_id;
-        // $publication->interdit()-> sync ($request -> input('interdit_id') ) ;
+        // $publication->interdit_id()->json_encode($request -> interdit_id) ;
+        // $publication->interdits()-> attach($request->interdits ) ;
         $publication->type_de_bien_id= $request -> type_de_bien_id;
 
         // $publication->password = Hash::make($request->password);
@@ -151,6 +158,14 @@ class PublicationController extends Controller
         $publication->statut_generique_id = 2;
         $publication->created_by = auth()->user()->nom_prenoms;
         // $annonceurs = Annonceur:: all();
+
+
+        // $communeId =  $request-> input('commune');
+        // $quartiers = Quartier::where('commune_id', $communeId)->get();
+        // return view('publications.create',[
+        //     'communes' => Commune::all(),
+        //     'quartiers' => $quartiers,
+        // ]);
 
 
         if($publication->save()){
@@ -179,7 +194,7 @@ class PublicationController extends Controller
     {
         //
         $data['publication'] = Publication::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail d'une Publication";
 
         if($data['publication'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -205,7 +220,7 @@ class PublicationController extends Controller
     {
         //
         $data['publication'] = Publication::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'une Publication ";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module Affichage ";
@@ -331,5 +346,13 @@ class PublicationController extends Controller
         UserActivity::saveActivity($module,$action);
         session()->flash('type', 'alert-success');
         return redirect()->back();
+    }
+    public function rechercheQuartiers(Request $request){
+        $communeId =  $request-> input('commune');
+        $quartiers = Quartier::where('commune_id', $communeId)->get();
+        return view('publications.index',[
+            'communes' => Commune::all(),
+            'quartiers' => $quartiers,
+        ]);
     }
 }

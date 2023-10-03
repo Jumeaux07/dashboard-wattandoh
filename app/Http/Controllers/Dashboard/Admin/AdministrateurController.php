@@ -116,7 +116,7 @@ class AdministrateurController extends Controller
     public function show($id)
     {
         $data['administrateur'] = User::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail d'un administrateur";
 
         if($data['administrateur'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -141,7 +141,7 @@ class AdministrateurController extends Controller
     public function edit($id)
     {
         $data['administrateur'] = User::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un administrateur";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

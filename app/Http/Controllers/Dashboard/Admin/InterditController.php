@@ -99,7 +99,7 @@ class InterditController extends Controller
     {
         //
         $data['interdit'] = Interdit::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail Interdit";
         if ($data['interdit'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher la page de interdit : {{$data['interdit']->libelle}}";
@@ -122,7 +122,7 @@ class InterditController extends Controller
     {
         //
         $data['interdit'] = Interdit::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un Interdit";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

@@ -30,21 +30,20 @@
         </div>
         <div class="card-body">
             <h6 class="card-subtitle">Les champs qui sont marqués par ( <span class="text-danger" >*</span> ) sont  obigatoires</h6>
-            <form action="{{route('images.store')}}" method="post" >
+            <form action="{{route('images.store')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">url  <span class="text-danger" >*</span> </label>
-                        <input type="file" name="url" value="{{old('url')}}" class="form-control" id="exampleInputEmail1"  placeholder="Ex: image(.png , .jpg ) ">
-
+                        <input type="file" name="url" value="{{old('url')}}" class="form-control" id="image"  placeholder="Ex: image(.png , .jpg ) " accept="image/*">
+                        <img id="imagePreview" src="" alt="Aperçu de l'image"  class="img-fluid rounded-carre">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Reference de la  Publication <span class="text-danger" >*</span> </label>
                         {{-- <input type="number" name="publication_id" value="{{old('publication_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 999999999 "> --}}
                        <select name="publication_id" class="form-control" id="exampleInputEmail1">
                         @foreach ($publications as $publication )
-                        <option value="{{ $publication->id }}">{{ $publication->reference }}</option>
-
+                            <option value="{{ $publication->id }}">{{ $publication->reference }}</option>
                         @endforeach
                        </select>
                     </div>
@@ -54,4 +53,24 @@
         </div>
     </div>
  </div>
+
+ <script>
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = ''; // Efface l'aperçu si aucun fichier n'est sélectionné
+        }
+    });
+</script>
 @endsection

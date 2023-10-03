@@ -16,10 +16,10 @@ class ImageSeeder extends Seeder
     public function run()
     {
         //*
-        DB::table('images')->insert([
-            'url'=>"image.jpg",
-            'publication_id'=>1,
-            'created_by'=>"valide",
-        ]);
+        // DB::table('images')->insert([
+        //     'url'=>"image.jpg",
+        //     'publication_id'=>1,
+        //     'created_by'=>"valide",
+        // ]);
     }
 }

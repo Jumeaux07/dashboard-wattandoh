@@ -126,7 +126,7 @@ class AnnonceurController extends Controller
     {
         //
         $data['annonceur'] = Annonceur::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail d'un annonceurs";
 
         if($data['annonceur'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -152,7 +152,7 @@ class AnnonceurController extends Controller
     {
         //
         $data['annonceur'] = Annonceur::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un annonceur";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

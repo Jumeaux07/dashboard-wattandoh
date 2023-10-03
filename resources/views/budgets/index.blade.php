@@ -73,6 +73,7 @@
                                                     @if ($budget->statut_generique_id == 1)
                                                     <a class="dropdown-item" href="{{route('budget.statutB',$budget->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
                                                     @endif
+                                                    {{-- <a class="dropdown-item" href="{{route('budget.delete', $budget->id)}}"> <i class="feather icon-delete" ></i> Supprimer</a> --}}
                                                 </div>
                                             </div>
                                         </div>

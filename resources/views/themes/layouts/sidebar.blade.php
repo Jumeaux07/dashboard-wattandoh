@@ -59,6 +59,17 @@
                         <img src="{{asset('assets/images/svg-icon/settings.svg')}}" class="img-fluid" alt="widgets"><span>Paramettres</span><span class="badge badge-success pull-right">New</span>
                     </a>
                 </li>
+                <li>
+                    <a href="javaScript:void();">
+                      <img src="{{ asset('assets/images/svg-icon/apps.svg') }}" class="img-fluid" alt="apps"><span>Parrainage </span><i class="feather icon-chevron-right pull-right"></i>
+                    </a>
+                    <ul class="vertical-submenu">
+
+                        {{-- <li><a href="{{Route('CodeQR.index')}}">Code QR </a></li> --}}
+
+                    </ul>
+
+                </li>
             </ul>
         </div>
         <!-- End Navigationbar -->

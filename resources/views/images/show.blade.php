@@ -30,15 +30,17 @@
             <hr>
 
             <div class="row">
-                {{-- <div class="col-md-4">
+                <div class="col-md-4">
                     <!-- Photo de profil -->
-                    <img src="{{asset('assets/images/users/profile.svg')}}" alt="Photo de profil" class="img-fluid rounded-circle">
-                </div> --}}
+                    <img src="{{ asset('storage/' . $image->url) }}" alt="Photo de profil" class="img-fluid rounded-circle">
+                </div>
                 <div class="col-md-8">
                     <!-- Informations utilisateur -->
                     {{-- <h3>{{$image->url}}</h3> --}}
-                    <img src="{{$image->url}}" alt="{{$image->url}}" class="img-fluid rounded-circle">
-                    <p>ID publication : {{$image->publication_id}}</p>
+                    <img src="{{$image->url}}" alt="{{$image->url}}" class="img-fluid rounded-circle" height="90px" width="90px" d="image">
+
+                    {{-- <img id="imagePreview" src="" alt="Aperçu de l'image" width="80px" height="80px" class="img-fluid rounded-carre"> --}}
+                    <br><p>ID publication : {{$image->publication_id}}</p>
                     {{-- <p>Numero de Telephone 2 : {{$client->phone2}}</p> --}}
                     {{-- <p>Sexe: {{$client->sexe}}</p> --}}
                     {{-- <p>Description : Compte client.</p> --}}
@@ -63,5 +65,23 @@
         </div>
     </div>
  </div>
+
+ {{-- <script>
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script> --}}
 
  @endsection

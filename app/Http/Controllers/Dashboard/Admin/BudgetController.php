@@ -120,7 +120,7 @@ class BudgetController extends Controller
     {
         //
         $data['budget'] = Budget::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail Budget";
 
         if($data['budget'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -147,7 +147,7 @@ class BudgetController extends Controller
         //
 
         $data['budget'] = Budget::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un budget";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";
@@ -220,7 +220,33 @@ class BudgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //suprression des element de la base de donne
+        // $budget = Budget:: findOrFail($id);
+
+        // if (!$budget){
+        //     session()->flash('type', 'alert-danger');
+        //     session()->flash('message', 'le budget est introuvable.');
+        //     return back();
+        // }
+        // $module = 'Module utilisateur';
+        // // supprimer le budget de la base donnes
+        // $budget->delete();
+        // if($budget->save()){
+        //     session()->flash('type','alert-success');
+        //     session()->flash('message','Les informations de l\'budget ont bien été supprimees ');
+
+        //     //pour l'activité méné par l'utilisateur connecté
+        //     $module = "Module utilisateur";
+        //     $action = " a suprimes les information d'un budget ";
+        //     UserActivity::saveActivity($module,$action);
+
+        //     return redirect()->route('budgets.index', );   //$budget->id
+        // }else{
+        //     session()->flash('type','alert-danger');
+        //     session()->flash('message','Une erreur s\'est produite lors de la suppressions');
+        // }
+
+
     }
 
 
@@ -248,4 +274,13 @@ class BudgetController extends Controller
         session()->flash('type', 'alert-success');
         return redirect()->back();
     }
+    // public function delete($id){
+    //     $budget = Budget::find($id);
+    //     if ($budget->delete()) {
+    //         # code...
+    //         session()->flash('type','alert-success');
+    //         session()->flash('message','Les informations de l\'budget ont bien été supprime');
+    //         return redirect()->back();
+    //     }
+    // }
 }

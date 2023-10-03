@@ -116,7 +116,7 @@ class RendezvousController extends Controller
     {
         //
         $data['rendezvou'] = Rendezvous::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail rendez vous";
 
         if($data['rendezvou'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -142,7 +142,7 @@ class RendezvousController extends Controller
     {
         //
         $data['rendezvou'] = Rendezvous:: find($id);
-        $data['subtitle'] = "Modification d'Utilisateur ";
+        $data['subtitle'] = "Modification d'Un rendez vous  ";
         $module = " Module Utilisateur";
         $action = " A afficher la page de modification d'un rendez vous ";
         UserActivity :: saveActivity('$module', '$action');

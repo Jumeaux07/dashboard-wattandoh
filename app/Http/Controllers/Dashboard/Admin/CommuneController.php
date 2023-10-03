@@ -105,7 +105,7 @@ class CommuneController extends Controller
     {
         //
         $data['commune'] = Commune::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail Commune";
         if ($data['commune'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher la commue : {{$data['commune']->libelle}}";
@@ -128,7 +128,7 @@ class CommuneController extends Controller
     {
         //
         $data['commune'] = Commune::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'une commune";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

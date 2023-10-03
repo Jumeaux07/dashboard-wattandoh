@@ -80,29 +80,29 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-sm-6">
+                    {{-- <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Interdit <span class="text-danger" >*</span></label>
+
 
                         <select name="interdit_id" id="exampleInputPassword1" class="form-control">
                             @foreach ($interdits as $interdit )
                             <option value="{{ $interdit->id }}">{{ $interdit ->libelle }}</option>
                             @endforeach
                         </select>
-                    </div>
-
-                    {{-- <div class="form-group col-sm-6">
+                    </div> --}}
+                    <div class="form-group col-sm-6">
                         <label for="interdit_id">Interdit <span class="text-danger" >*</span></label>
 
-                        <select name="interdit_id" id="interdit_id"  class="form-control" >
+                        <select name="interdit_id" id="exampleInputPassword1" class="form-control"   >
                             @foreach ($interdits as $interdit )
                             <option value="{{ $interdit->id }}">{{ $interdit->libelle }}</option>
                             @endforeach
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Type de bien  <span class="text-danger" >*</span></label>
 
-                        <select name="type_de_bien_id" id="exampleInputPassword1" class="form-control">
+                        <select name="type_de_bien_id" id="exampleInputPassword1" class="form-control" >
                             {{-- <select required class="form-select form-select-solid" data-control="select2" data-hide-search="true" multiple="multiple" data-placeholder="Selectionnez le(s) type(s) de biens..." name="typebiens[]" style=" background:rgba(209, 205, 205, 0.541);"> --}}
                             @foreach ($typedebiens as $typedebien )
                             <option value="{{ $typedebien->id }}">{{ $typedebien ->libelle }}</option>
@@ -121,7 +121,7 @@
 
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1"> Commune <span class="text-danger" >*</span></label>
-                        {{-- <input type="number" name="commune_id" value="{{old('commune_id')}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: Identifiant commune"> --}}
+
                         <select name="commune_id" id="commune" class="form-control">
                             @foreach ($communes as $commune )
                             <option value="{{ $commune->id }}">{{ $commune ->libelle }}</option>
@@ -139,25 +139,31 @@
                             @endforeach
                         </select>
                     </div>
-                    <script>
-                        document.getElementById('commune').addEventListener('change', function(){
-                            var communeId = this.value;
-                            fetch('/quartiers/' +communeId)
-                               .then(response => response.json())
-                               .then(data => {
-                                var quartierSelect = document.getElementById('quartier');
-                                 quartierSelect.innerHTML = ' ';// efface les options de la table quartiers
-                                 data.forEach(quartier => {
-                                    var option = document.createElement('option');
-                                    option.value = quartier.id;
-                                    option.text = quartier.libelle;
-                                    quartierSelect.appendChild(option);
 
+                    {{-- <form action="{{ route('rechercheQuartiers') }}" method="POST">
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputPassword1"> Commune <span class="text-danger" >*</span></label>
 
-                                 });
-                               })
-                        });
-                    </script>
+                            <select name="commune_id" id="commune" class="form-control">
+                                @foreach ($communes as $commune )
+                                <option value="{{ $commune->id }}">{{ $commune ->libelle }}</option>
+
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="exampleInputPassword1">Quartier <span class="text-danger" >*</span></label>
+
+                            -
+                            <select name="quartier" id="quartier" class="form-control" disabled>
+                                <option value="">selectionnez une commnue d'abord</option>
+                            </select>
+                        </div>
+                        <button type="submit">Rechercher</button>
+
+                    </form> --}}
+
 
 
                     <div class="form-group col-sm-6">
@@ -178,8 +184,64 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>
+
             </form>
         </div>
     </div>
  </div>
+ {{-- <script src="{{ asset('https://code.jquery.com/jquery-3.6.0.min.js') }}">
+ </script> --}}
+ {{-- <script>
+     $(document).ready(function(){
+         $('#commune').change(function(){
+             var communeId = $(this).val();
+
+             $.ajax({
+                 type: 'GET',
+                 url: '/get-quartiers',
+                 data: {commune_id: communeId},
+                 success: function(data){
+                     $('#quartiers').html(data);
+                    var quartierSelect = $('#quartier');
+                    quartierSelect.empty();
+                    $.each(data, function(index, quartier){
+                        quartierSelect.append('<option value="' + quartier.id + '">' + quartier.libelle + '</option>');
+                    });
+                 },
+
+             });
+         });
+     });
+ </script> --}}
+ <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const communeSelect = document.getElementById('commune');
+        const quartierSelect = document.getElementById('quartier');
+        communeSelect.addEventListener("change", function(){
+            const selectedCommuneId = communeSelect.value;
+
+            // desactiver le menu deroulant des quartiers si aucune commune n'a ete selectionne
+            quartierSelect.disabled = !selectedCommuneId;
+            // efface  les options  precedentes
+            quartierSelect.innerHTML = "";
+            if (selectedCommuneId) {
+                 // Chargez les quartiers en fonction de la commune sélectionnée
+                 @foreach($quartiers as $quartier)
+                    if ({{ $quartier->commune_id }} == selectedCommuneId) {
+                        const option = document.createElement("option");
+                        option.value = {{ $quartier->id }};
+                        option.text = "{{ $quartier->libelle }}";
+                        quartierSelect.appendChild(option);
+                    }
+                @endforeach
+
+            }else {
+                // Si aucune commune n'est sélectionnée, affichez un message
+                const option = document.createElement("option");
+                option.text = "Sélectionnez d'abord une commune";
+                quartierSelect.appendChild(option);
+            }
+        });
+    });
+ </script>
 @endsection

@@ -108,7 +108,7 @@ class QuartierController extends Controller
     {
         //
         $data['quartier'] = Quartier::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail Quartier";
         if ($data['quartier'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher le quartier : {{$data['quartier']->libelle}}";
@@ -131,7 +131,7 @@ class QuartierController extends Controller
     {
         //
         $data['quartier'] = Quartier::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un quartier";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";
@@ -225,4 +225,10 @@ class QuartierController extends Controller
         return response()->json($quartiers);
 
     }
+
+    // public function getQuartiers(Request $request){
+    //     $communeId =  $request -> input ('commune-id');
+    //     $quartiers = Quartier::where('commune_id', $communeId)->get();
+    //     return response()->json($quartiers);
+    // }
 }

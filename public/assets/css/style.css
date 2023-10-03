@@ -61,7 +61,7 @@
 ----------------------------
 */
 @import url("https://fonts.googleapis.com/css?family=Muli:400,600,700&amp;display=swap");
-/* 
+/*
 --------------------------------
     : Custom - General css :
 --------------------------------
@@ -231,7 +231,7 @@ code {
   background: transparent;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Helper css :
 -------------------------------
@@ -961,7 +961,7 @@ code {
   background-color: rgba(38, 58, 91, 0.1);
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Example css :
 --------------------------------
@@ -1339,7 +1339,7 @@ code {
   background-color: #263a5b;
 }
 
-/* 
+/*
 ----------------------------------
     : Custom - Bootstrap css :
 ----------------------------------
@@ -1654,7 +1654,7 @@ mark {
   color: #282828;
 }
 
-/* 
+/*
 ------------------------------
     : Custom - Icons css :
 ------------------------------
@@ -26451,7 +26451,7 @@ mark {
   content: "";
 }
 
-/* 
+/*
 -----------------------------
     : Custom - Menu css :
 -----------------------------
@@ -26747,7 +26747,7 @@ mark {
   color: #0080ff;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Topbar css :
 -------------------------------
@@ -27224,7 +27224,7 @@ mark {
   margin-right: 0;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Alerts css :
 -------------------------------
@@ -27335,7 +27335,7 @@ mark {
   border-top-color: #263a5b;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Badges css :
 -------------------------------
@@ -27552,7 +27552,7 @@ mark {
   color: #ffffff;
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Buttons css :
 --------------------------------
@@ -28813,7 +28813,7 @@ mark {
   box-shadow: 0 0 0 0.2rem #4468a3;
 }
 
-/* 
+/*
 ---------------------------------
     : Custom - Calender css :
 ---------------------------------
@@ -28920,7 +28920,7 @@ mark {
   cursor: move;
 }
 
-/* 
+/*
 ------------------------------
     : Custom - Cards css :
 ------------------------------
@@ -29082,7 +29082,7 @@ mark {
   float: right;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Charts css :
 -------------------------------
@@ -29741,7 +29741,7 @@ canvas {
   font-family: "Muli", sans-serif !important;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Chat css :
 -------------------------------
@@ -29892,7 +29892,7 @@ canvas {
   margin: 0 5px;
 }
 
-/* 
+/*
 ---------------------------------
     : Custom - Collapse css :
 ---------------------------------
@@ -30012,7 +30012,7 @@ canvas {
   border-bottom: none;
 }
 
-/* 
+/*
 ----------------------------------
     : Custom - Dashboard css :
 ----------------------------------
@@ -30183,7 +30183,7 @@ canvas {
   color: #0080ff;
 }
 
-/* 
+/*
 -----------------------------------
     : Custom - eCommerce css :
 -----------------------------------
@@ -30406,7 +30406,7 @@ canvas {
     left: -80px;
   }
 }
-/* 
+/*
 -------------------------------
     : Custom - Emails css :
 -------------------------------
@@ -30473,7 +30473,7 @@ canvas {
   color: #0080ff;
 }
 
-/* 
+/*
 -----------------------------------------
     : Custom - Form Colorpicker css :
 -----------------------------------------
@@ -30530,7 +30530,7 @@ canvas {
   box-shadow: none;
 }
 
-/* 
+/*
 -----------------------------------------
     : Custom - Form Date Picker css :
 -----------------------------------------
@@ -30746,7 +30746,7 @@ canvas {
   font-size: 16px;
 }
 
-/* 
+/*
 -------------------------------------
     : Custom - Form Editors css :
 -------------------------------------
@@ -30849,7 +30849,7 @@ canvas {
   background: #0080ff !important;
 }
 
-/* 
+/*
 --------------------------------------
     : Custom - Form Elements css :
 --------------------------------------
@@ -31230,7 +31230,7 @@ input[type=range]:focus {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* 
+/*
 -------------------------------------
     : Custom - Form Selects css :
 -------------------------------------
@@ -31381,7 +31381,7 @@ input[type=range]:focus {
   background-color: #0080ff;
 }
 
-/* 
+/*
 -----------------------------------------
     : Custom - Form File Upload css :
 -----------------------------------------
@@ -31397,7 +31397,7 @@ input[type=range]:focus {
   font-size: 30px;
 }
 
-/* 
+/*
 ----------------------------------------
     : Custom - Form Validation css :
 ----------------------------------------
@@ -31426,7 +31426,7 @@ input[type=range]:focus {
   display: block;
 }
 
-/* 
+/*
 ------------------------------------
     : Custom - Form Wizard css :
 ------------------------------------
@@ -31646,7 +31646,7 @@ input[type=range]:focus {
     width: 100%;
   }
 }
-/* 
+/*
 -------------------------------
     : Custom - Gallery css :
 -------------------------------
@@ -31743,7 +31743,7 @@ input[type=range]:focus {
   opacity: 1;
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Invoice css :
 --------------------------------
@@ -31805,7 +31805,7 @@ input[type=range]:focus {
     margin-top: 30px;
   }
 }
-/* 
+/*
 ---------------------------------------
     : Custom - jQuery Confirm css :
 ---------------------------------------
@@ -31888,7 +31888,7 @@ input[type=range]:focus {
   border-top: none;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - jsTree css :
 -------------------------------
@@ -31923,7 +31923,7 @@ input[type=range]:focus {
   line-height: 26px;
 }
 
-/* 
+/*
 --------------------------------------
     : Custom - Kanban Board css :
 --------------------------------------
@@ -31962,7 +31962,7 @@ input[type=range]:focus {
   transform: scale(1.1);
 }
 
-/* 
+/*
 -----------------------------
     : Custom - Maps css :
 -----------------------------
@@ -32028,7 +32028,7 @@ input[type=range]:focus {
     height: 200px;
   }
 }
-/* 
+/*
 ------------------------------
     : Custom - Modal css :
 ------------------------------
@@ -32076,7 +32076,7 @@ input[type=range]:focus {
   display: block;
 }
 
-/* 
+/*
 ---------------------------------
     : Custom - Nestable css :
 ---------------------------------
@@ -32194,7 +32194,7 @@ input[type=range]:focus {
   border-radius: 3px;
 }
 
-/* 
+/*
 -------------------------------------------
     : Custom - Onboarding Screens css :
 -------------------------------------------
@@ -32246,7 +32246,7 @@ input[type=range]:focus {
   content: none;
 }
 
-/* 
+/*
 -----------------------------------
     : Custom - Pagination css :
 -----------------------------------
@@ -32279,7 +32279,7 @@ input[type=range]:focus {
   border-color: rgba(0, 0, 0, 0.03);
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Pnotify css :
 --------------------------------
@@ -32335,7 +32335,7 @@ input[type=range]:focus {
   font-size: 20px;
 }
 
-/* 
+/*
 --------------------------------------------
     : Custom - Popovers & Tooltips css :
 --------------------------------------------
@@ -32404,7 +32404,7 @@ input[type=range]:focus {
   padding: 4px 10px;
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Pricing css :
 --------------------------------
@@ -32440,7 +32440,7 @@ input[type=range]:focus {
   padding-bottom: 30px;
 }
 
-/* 
+/*
 ------------------------------
     : Custom - Print css :
 ------------------------------
@@ -32466,7 +32466,7 @@ input[type=range]:focus {
     margin-left: 0;
   }
 }
-/* 
+/*
 ------------------------------------
     : Custom - Progressbar css :
 ------------------------------------
@@ -32479,7 +32479,7 @@ input[type=range]:focus {
   background-color: #0080ff;
 }
 
-/* 
+/*
 -------------------------------------
     : Custom - Range Slider css :
 -------------------------------------
@@ -32694,7 +32694,7 @@ input[type=range]:focus {
   color: #8A98AC;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Rating css :
 -------------------------------
@@ -33237,7 +33237,7 @@ input[type=range]:focus {
     color: #0080ff;
   }
 }
-/* 
+/*
 ---------------------------------------
     : Custom - Security Pages css :
 ---------------------------------------
@@ -33372,7 +33372,7 @@ input[type=range]:focus {
     text-align: left;
   }
 }
-/* 
+/*
 -----------------------------------
     : Custom - Summernote css :
 -----------------------------------
@@ -33468,7 +33468,7 @@ input[type=range]:focus {
   padding: 5px 0 10px 5px;
 }
 
-/* 
+/*
 ------------------------------------
     : Custom - Sweet Alert css :
 ------------------------------------
@@ -33581,7 +33581,7 @@ input[type=range]:focus {
   background-color: #ff3f3f;
 }
 
-/* 
+/*
 ----------------------------------
     : Custom - Switchery css :
 ----------------------------------
@@ -33619,7 +33619,7 @@ input[type=range]:focus {
   width: 40px;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Tables css :
 -------------------------------
@@ -33987,7 +33987,7 @@ table.focus-on tfoot tr.focused td {
   font-family: "feather" !important;
 }
 
-/* 
+/*
 -----------------------------
     : Custom - Tabs css :
 -----------------------------
@@ -34074,7 +34074,7 @@ table.focus-on tfoot tr.focused td {
   display: block;
 }
 
-/* 
+/*
 ---------------------------------
     : Custom - Timeline css :
 ---------------------------------
@@ -34083,7 +34083,7 @@ table.focus-on tfoot tr.focused td {
   padding: 2.5em 0;
 }
 
-/* 
+/*
 --------------------------------
     : Custom - Toolbar css :
 --------------------------------
@@ -34303,7 +34303,7 @@ table.focus-on tfoot tr.focused td {
   background: #1e2f49;
 }
 
-/* 
+/*
 -------------------------------
     : Custom - Tour css :
 -------------------------------
@@ -34434,7 +34434,7 @@ table.focus-on tfoot tr.focused td {
     color: #93b4d4;
   }
 }
-/* 
+/*
 --------------------------------
     : Custom - Widgets css :
 --------------------------------
@@ -34642,7 +34642,7 @@ table.focus-on tfoot tr.focused td {
     margin-top: 15px;
   }
 }
-/* 
+/*
 -----------------------------------
     : Custom - Responsive css :
 -----------------------------------
@@ -34863,3 +34863,21 @@ table.focus-on tfoot tr.focused td {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+/* .select2-container--bootstrap5 .select2-selection--multiple:not(.form-select-sm):not(.form-select-lg) .select2-selection__choice{
+    border-radius:.475rem;
+    padding:0px 5px;
+    margin-right:.5rem;
+    margin-top:.1rem;
+    margin-bottom:.1rem;}
+.select2-container--bootstrap5 .select2-selection--multiple:not(.form-select-sm):not(.form-select-lg) .select2-selection__choice .select2-selection__choice__display{
+    margin-left:1.1rem;
+    font-size:12px}
+.select2-container--bootstrap5 .select2-selection--multiple:not(.form-select-sm):not(.form-select-lg) .select2-search__field{
+    height:24px} */
+/* font-size: 12px;
+padding: 0px 5px;
+line-height: 24px;
+height: 24px; */

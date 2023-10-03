@@ -101,7 +101,7 @@ class TypedemarcheController extends Controller
     {
         //
         $data['typedemarche'] = TypeDeMarche::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail Type de Marche";
         if ($data['typedemarche'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher la page de typedemarche : {{$data['typedemarche']->libelle}}";
@@ -124,7 +124,7 @@ class TypedemarcheController extends Controller
     {
         //
         $data['typedemarche'] = TypeDeMarche::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un Type de Marche";
 
         $module = "Module utilisateur";
         $action = " a affiché la page de modification d'un typedemarche ";

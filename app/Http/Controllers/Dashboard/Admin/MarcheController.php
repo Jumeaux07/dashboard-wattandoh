@@ -112,7 +112,7 @@ class MarcheController extends Controller
         // verification du profil (detail)
 
         $data['marche'] = Marche::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail marche";
         if($data['marche'] != null){
             //pour l'activité méné par l'utilisateur connecté
             $module = "Module utilisateur";
@@ -137,7 +137,7 @@ class MarcheController extends Controller
     {
         // modifier un marches
         $data['marche'] = Marche:: find($id);
-        $data['subtitle'] = "Modification d'Utilisateur ";
+        $data['subtitle'] = "Modification d'un marche ";
         $module = " Module Utilisateur";
         $action = " A afficher la page de modification d'un marche ";
         UserActivity :: saveActivity('$module', '$action');

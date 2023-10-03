@@ -146,7 +146,7 @@ class GestionnaireController extends Controller
     {
         //
         $data['gestionnaire'] = User::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail de gestionnaire";
 
         if($data['gestionnaire'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -172,7 +172,7 @@ class GestionnaireController extends Controller
     {
         //
         $data['gestionnaire'] = User::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un gestionnaire ";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

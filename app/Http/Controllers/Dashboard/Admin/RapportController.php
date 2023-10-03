@@ -121,7 +121,7 @@ class RapportController extends Controller
     {
         //
         $data['rapport'] = Rapport::find($id);
-        $data['subtitle']= " Detail Utilisateur";
+        $data['subtitle']= " Detail Rapport ";
         if ($data['rapport'] != null ) {
             $module = "Module Utilisateur";
             $action = " a afficher le rapport : {{$data['rapport']->reference}}";
@@ -144,7 +144,7 @@ class RapportController extends Controller
     {
         //
         $data['rapport'] = Rapport::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un Rapport";
 
         $module = "Module utilisateur";
         $action = " a affiché la page de modification d'un rapport ";

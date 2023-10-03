@@ -34,7 +34,8 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Url </th>
+                            {{-- <th>Url </th> --}}
+                            <th>image </th>
                             <th>Reference de publication</th>
                             {{-- <th>Statut</th> --}}
                             <th>Date de creation</th>
@@ -44,7 +45,11 @@
                         <tbody>
                             @foreach ($images as $image)
                                 <tr>
-                                    <td>{{$image->url}}</td>
+                                    {{-- <td>{{$image->url}}</td> --}}
+                                    <td>
+                                        <img src="{{ asset('storage/' . $image->url) }}" alt="image affiche" width="50px" height="40px">
+
+                                    </td>
                                     <td>{{$image->publication->reference}}</td>
                                     {{-- @if ($image->statut_generique_id == 2)
                                         <td><span class="badge badge-success">Actif</span></td>

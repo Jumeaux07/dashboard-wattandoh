@@ -66,18 +66,34 @@ class ImageController extends Controller
     {
         //
         $validator =  Validator::make($request->all(),[
-            'url'=>'required',
-            // 'url'=>'required|image|mimes:jpeg,png,gif|max:2048',
+            // 'url'=>'required',
+            'url'=>'required|image|mimes:jpeg,png,gif|max:2048',
             // dd('url'),
             'publication_id'=> 'required',
         ]);
+
         if($validator->fails()){
             session()->flash('type','alert-danger');
             session()->flash('message','Erreur dans le formulaire');
             return back()->withErrors($validator->errors())->withInput($request->input());
         }
+        $imagePath = $request->file('url');  //->store('images', 'public')
+        $imageName = time() . '.'. $imagePath->getClientOriginalExtension();
+
+        // enregistre l image dans la bd
+
+
+        // reduisez les dimensions de l 'image si necessaire
+
+        // $image =  Image::make(public_path("storage/$imagePath"));
+        // // redimensionnez l'image ici (par exemple ,a une largueur de 800px )
+        // $image ->resize(800,null, function($constraint){
+        //     $constraint->aspectRatio();
+        // });
         $image = new Image();
-        $image->url = htmlspecialchars($request->url);
+        // $image->url = htmlspecialchars($request->url);
+        $image->url = $imageName;
+        // $imagePath = $request->file('url')->store('images', 'public');
         // $image->url = $request->file('url')->storage('photopubs');
         // dd($image->url );
         // $image = $request->file('url')->storage_path('photopubs');
@@ -90,7 +106,8 @@ class ImageController extends Controller
             UserActivity::saveActivity($module,$action);
             session()->flash('type','alert-success');
             session()->flash('message','image créé avec succès');
-            return redirect()->route('images.index');
+            // list($width, $height) = getimagesize(storage_path('app/public/' . $imagePath));
+            return redirect()->route('images.index',['id'=>$image->id]);
         }else{
             session()->flash('type','alert-danger');
             session()->flash('message','La création d\'une Image  a échoué');
@@ -108,14 +125,18 @@ class ImageController extends Controller
     {
         //
         $data['image'] = Image::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $image = Image::findOrFail($id);
+        $imagePath = storage_path('app/public/' .$image->url);
+        // list($width,$height) = getimagesize($imagePath);
+        $data['subtitle'] = "Detail Image";
         if($data['image'] != null){
             //pour l'activité méné par l'utilisateur connecté
             $module = "Module utilisateur";
-            $action = " a affiché la page de detail d'une image de  : {{$data['image']->url}} ";
+            $action = " a affiché la page de detail d'une image de  :  ";
+            //{{$data['image']->url}}
             UserActivity::saveActivity($module,$action);
 
-            return view('images.show', $data);
+            return view('images.show', $data,compact('image',));
         }else{
             session()->flash('type','alert-danger');
             session()->flash('message',"image  introuvable");
@@ -133,7 +154,7 @@ class ImageController extends Controller
     {
         //
         $data['image'] = Image:: find($id);
-        $data['subtitle'] = "Modification d'Utilisateur ";
+        $data['subtitle'] = "Modification d'Une Image";
         $module = " Module Utilisateur";
         $action = " A afficher la page de modification d'une Image ";
         UserActivity :: saveActivity('$module', '$action');

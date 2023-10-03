@@ -19,6 +19,7 @@ use App\Http\Controllers\Dashboard\Admin\AdministrateurController;
 use App\Http\Controllers\Dashboard\Admin\InterditController;
 use App\Http\Controllers\Dashboard\Admin\OtpController;
 use App\Http\Controllers\Dashboard\Admin\TypedemarcheController;
+use App\Http\Controllers\Dashboard\Admin\CodeController;
 
 // use App\Models\Commune;
 // use App\Models\Publication;
@@ -34,7 +35,7 @@ Route::prefix('admin')->group(function () {
     // Route::get('$administrateurShow/{id}',[AdministrateurController::class,'show'])->name('administrateurs.show');
 
     //activer ou desactiver un admin
-    Route::get('changeStatut/{id}',[AdministrateurController::class,'change'])->name('administrateur.changeStatut');
+    Route::get('changeStatut/{id}',[AdministrateurController::class,'changeStatut'])->name('administrateur.changeStatut');
 //                     ONGLETS ANNONCEURS
     // route specialiale annonceurs
     Route::resource('annonceurs',AnnonceurController::class);
@@ -60,10 +61,11 @@ Route::prefix('admin')->group(function () {
      // publication
      Route::resource('publications',PublicationController::class);
      Route::get('statutPub/{id}',[PublicationController::class,'statutPub'])->name('publication.statutPub');
-
+     Route:: post('/recherche-quartiers', 'PublicationController@rechercheQuartiers')->name('rechercheQuartiers');
      // budgets
      Route::resource('budgets',BudgetController::class);
      Route::get('statutB/{id}',[BudgetController::class,'statutB'])->name('budget.statutB');
+    //  Route::delete('delete/{id}',[BudgetController::class, 'delete'])->name('budget.delete');
 
      // Communes
      Route::resource('communes', CommuneController::class);
@@ -72,6 +74,7 @@ Route::prefix('admin')->group(function () {
      // Quartier
      Route::resource('quartiers', QuartierController::class);
      Route::get('statutQuartier/{id}',[QuartierController::class,'statutQuartier'])->name('quartier.statutQuartier');
+    //  Route::get('get-quartiers', 'QuartierController@getQuartiers');
 
      // Rendez Vous
      Route::resource('rendezvous', RendezvousController::class);
@@ -99,4 +102,6 @@ Route::prefix('admin')->group(function () {
 
      // otp
      Route::resource('otps',OtpController::class);
+     // code Qr
+     Route::resource('codeQR', CodeController::class);
 });

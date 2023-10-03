@@ -105,7 +105,7 @@ class TypedebienController extends Controller
     {
         //
         $data['typedebien'] = TypeDeBien::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail d'un Type de bien";
         if($data['typedebien'] != null){
             //pour l'activité méné par l'utilisateur connecté
             $module = "Module utilisateur";
@@ -130,7 +130,7 @@ class TypedebienController extends Controller
     {
         //
         $data['typedebien'] = TypeDeBien:: find($id);
-        $data['subtitle'] = "Modification d'Utilisateur ";
+        $data['subtitle'] = "Modification d'Un Type de Bien ";
         $module = " Module Utilisateur";
         $action = " A afficher la page de modification d'un type de bien ";
         UserActivity :: saveActivity('$module', '$action');
