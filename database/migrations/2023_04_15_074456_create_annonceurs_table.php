@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone1');
             $table->string('phone2')->nullable();
             $table->string('sexe');
-            $table->string('parrain');
+            $table->boolean('parrain');
             $table->string('password');
             $table->unsignedBigInteger('quartier_id')->nullable();
             $table->foreign('quartier_id')->references('id')->on('quartiers')->onDelete('cascade')->onUpdate('cascade');
