@@ -1,7 +1,7 @@
             <!-- Start Footerbar -->
             <div class="footerbar">
                 <footer class="footer">
-                    <p class="mb-0">© 2020 Orbiter - All Rights Reserved.</p>
+                    <p class="mb-0">© 2023  watttandoh -  Dashboard app</p>
                 </footer>
             </div>
             <!-- End Footerbar -->
@@ -45,6 +45,8 @@
     <script src="{{asset('assets/plugins/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
     <script src="{{asset('assets/js/custom/custom-table-datatable.js')}}"></script>
+
+
 </body>
 
 <!-- Mirrored from themesbox.in/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Apr 2023 16:27:12 GMT -->

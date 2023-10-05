@@ -28,5 +28,11 @@ class BudgetSeeder extends Seeder
         'statut_generique_id'=>1,
         'created_by'=>"wattandoh",
         ]);
+        DB::table('budgets')->insert([
+            'min'=>150000,
+            'max'=>200000,
+            'statut_generique_id'=>2,
+            'created_by'=>"wattandoh",
+            ]);
     }
 }

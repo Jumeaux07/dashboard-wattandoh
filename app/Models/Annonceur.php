@@ -4,17 +4,20 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Commune;
+use App\Models\Rapport;
 use App\Models\Quartier;
+use App\Models\Publication;
 use App\Models\StatutGenerique;
+use Laravel\Sanctum\HasApiTokens;
+// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Annonceur as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+// use Illuminate\Foundation\Auth\Annonceur as Authenticatable;
 
-class Annonceur extends Model
+class Annonceur extends  Model
 {
     use HasApiTokens, HasFactory, SoftDeletes,  Notifiable;
 
@@ -23,6 +26,7 @@ class Annonceur extends Model
         'phone1',
         'phone2',
         'sexe',
+        'parrain',
         'password',
         'user_id',
         'quartier_id',
@@ -50,6 +54,9 @@ class Annonceur extends Model
 
     public function publications(){
         return $this->hasMany(Publication::class);
+    }
+    public function rapports(){
+        return $this->hasMany(Rapport::class);
     }
 
     protected $hidden = [

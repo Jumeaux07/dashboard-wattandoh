@@ -68,6 +68,7 @@
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
 
+
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Mot de passe  <span class="text-danger" >*</span> </label>
                         <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="XXXXXXX">
@@ -76,6 +77,16 @@
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Confirmation <span class="text-danger" >*</span></label>
                         <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="XXXXXXX">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Code Parrainage   <span class="text-danger" >*</span> </label>
+                        {{-- <input type="text" name="parrain" value="{{old('parrain')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 0102030405"> --}}
+                        <select name="parrain" id="" class="form-control">
+                            {{-- <option value="" selected>A:</option> --}}
+                            <option value="parrain" selected>Active</option>
+                            <option value="pas parrain " selected>Desactiver</option>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>

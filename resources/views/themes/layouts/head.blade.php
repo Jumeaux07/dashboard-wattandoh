@@ -4,6 +4,7 @@
 <!-- Mirrored from themesbox.in/admin-templates/orbiter/html/light-vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Apr 2023 16:25:51 GMT -->
 <head>
     <meta charset="UTF-8">
+    {{-- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> --}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{-- <meta name="description" content="Orbiter is a bootstrap minimal & clean admin template"> --}}
     {{-- <meta name="keywords" content="admin, admin panel, admin template, admin dashboard, responsive, bootstrap 4, ui kits, ecommerce, web app, crm, cms, html, sass support, scss"> --}}
@@ -14,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>{{ucfirst($title) ?? '' }} {{ucfirst($setting->companyname ?? '') }}</title>
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('assets/images/watta.png')}}">
     <!-- Start css -->
     @stack('css')
     <!-- Switchery css -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="FR">
 
 <!-- Mirrored from themesbox.in/admin-templates/orbiter/html/light-vertical/user-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Apr 2023 16:33:32 GMT -->
 <head>
@@ -9,9 +9,9 @@
     <meta name="keywords" content="admin, admin panel, admin template, admin dashboard, responsive, bootstrap 4, ui kits, ecommerce, web app, crm, cms, html, sass support, scss">
     <meta name="author" content="Themesbox">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Connexion | Administrateur</title>
+    <title>Connexion | Gestionnaire</title>
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('assets/images/watta.png')}}">
     <!-- Start css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css">
@@ -37,11 +37,11 @@
                                         @csrf
                                         <div class="form-head">
 
-                                            <a href="index.html" class="logo"><img src="{{asset('assets/images/logo.svg')}}" class="img-fluid" alt="logo"></a>
+                                            <a href="#" class="logo"><img src="{{asset('assets/images/Wattandoh.png')}}" class="img-fluid" alt="logo"></a>
                                         </div>
                                         <h4 class="text-primary my-4">Connexion</h4>
                                         <div class="form-group">
-                                            <input type="email" class="form-control" id="username" name="email" placeholder="Enter Username here" required>
+                                            <input type="email" class="form-control" id="username" name="email" placeholder="Entrez le mail de l'utilisateur ici..." required>
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password here" required>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Entrez le mot de passe ici..." required>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

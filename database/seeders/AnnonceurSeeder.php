@@ -21,6 +21,8 @@ class AnnonceurSeeder extends Seeder
             'phone1'=>"01020304",
             'phone2'=>"09080706",
             'sexe'=>"M",
+            'parrain'=>"P",
+
             'password'=>bcrypt('1234567'),
             'user_id'=>1,
             'quartier_id'=>1,
@@ -33,6 +35,7 @@ class AnnonceurSeeder extends Seeder
             'phone1'=>"01020304",
             'phone2'=>"09080706",
             'sexe'=>"M",
+            'parrain'=>"N",
             'password'=>bcrypt('1234567'),
             'user_id'=>1,
             'quartier_id'=>1,

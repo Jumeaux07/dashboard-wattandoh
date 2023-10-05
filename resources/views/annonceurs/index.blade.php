@@ -38,6 +38,7 @@
                             <th>Telephone 1</th>
                             <th>Téléphone 2</th>
                             <th>Sexe</th>
+                            <th>Code parrainage</th>
                             <th>Statut</th>
                             <th>Date de creation</th>
                             <th>Actions</th>
@@ -50,11 +51,14 @@
                                     <td>{{$annonceur->phone1}}</td>
                                     <td>{{$annonceur->phone2}}</td>
                                     <td>{{$annonceur->sexe}}</td>
+                                    <td>{{$annonceur->parrain}}</td>
                                     @if ($annonceur->statut_generique_id == 2)
                                         <td><span class="badge badge-success">Actif</span></td>
                                     @elseif ($annonceur->statut_generique_id == 1)
                                         <td><span class="badge badge-danger">Désactivé</span></td>
                                     @endif
+
+
                                     <td>{{date('d-m-Y à H:i', strtotime($annonceur->created_at))}}</td>
                                     <td>
                                         <div class="single-dropdown">
@@ -73,6 +77,8 @@
                                                     @if ($annonceur->statut_generique_id == 1)
                                                     <a class="dropdown-item" href="{{route('annonceur.statutA',$annonceur->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
                                                     @endif
+
+
                                                 </div>
                                             </div>
                                         </div>

@@ -40,7 +40,7 @@
                     <p>Numero de Telephone 1 : {{$annonceur->phone1}}</p>
                     <p>Numero de Telephone 2 : {{$annonceur->phone2}}</p>
                     <p>Sexe: {{$annonceur->sexe}}</p>
-                    <p>Description : Compte annonceur.</p>
+                    <p>Description : Compte  {{$annonceur->parrain}}</p>
                 </div>
             </div>
 

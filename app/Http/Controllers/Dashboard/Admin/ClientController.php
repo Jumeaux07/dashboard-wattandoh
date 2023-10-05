@@ -119,7 +119,7 @@ class ClientController extends Controller
     {
         //
         $data['client'] = Client::find($id);
-        $data['subtitle'] = "Detail utilisateur";
+        $data['subtitle'] = "Detail d'un client";
 
         if($data['client'] != null){
             //pour l'activité méné par l'utilisateur connecté
@@ -145,7 +145,7 @@ class ClientController extends Controller
     {
         //
         $data['client'] = Client::find($id);
-        $data['subtitle'] = "Modification d'un utilisateur";
+        $data['subtitle'] = "Modification d'un client";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module utilisateur";

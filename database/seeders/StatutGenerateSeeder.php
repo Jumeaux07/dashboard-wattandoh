@@ -30,5 +30,15 @@ class StatutGenerateSeeder extends Seeder
             'description' => 'en attente',
             'created_by' => 'Wattandoh'
         ]);
+        DB::table('statut_generiques')->insert([
+            'statut' => 4,
+            'description' => 'parrain',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('statut_generiques')->insert([
+            'statut' => 5,
+            'description' => 'pas parrain',
+            'created_by' => 'Wattandoh'
+        ]);
     }
 }

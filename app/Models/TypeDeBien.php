@@ -22,6 +22,6 @@ class TypeDeBien extends Model
     }
 
     public function publications(){
-        return $this->belongsTo(Publication::class);
+        return $this->hasMany(Publication::class);
     }
 }
