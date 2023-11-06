@@ -8,7 +8,7 @@
             <h4 class="page-title">{{ $module ?? '' }}</h4>
             <div class="breadcrumb-list">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">{{ $menu ?? '' }}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{ $menu ?? '' }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
             </div>
@@ -38,6 +38,7 @@
                             <th>date</th>
                             <th>publications </th>
                             <th>clients </th>
+                            <th>tel client </th>
                             <th>Statut</th>
                             <th>Date de creation</th>
                             <th>Actions</th>
@@ -50,6 +51,7 @@
                                     <td>{{$rendezvou->date}}</td>
                                     <td>{{$rendezvou->publication->description}}</td>
                                     <td>{{$rendezvou->client->nom_prenoms}}</td>
+                                    <td>{{$rendezvou->client->phone1}}</td>
                                     @if ($rendezvou->statut_generique_id == 2)
                                         <td><span class="badge badge-success">Actif</span></td>
                                     @elseif ($rendezvou->statut_generique_id == 1)

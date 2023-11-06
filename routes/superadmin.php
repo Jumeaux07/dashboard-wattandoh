@@ -16,10 +16,14 @@ use App\Http\Controllers\Dashboard\Admin\TypedebienController;
 use App\Http\Controllers\Dashboard\Admin\PublicationController;
 use App\Http\Controllers\Dashboard\Admin\GestionnaireController;
 use App\Http\Controllers\Dashboard\Admin\AdministrateurController;
+use App\Http\Controllers\Dashboard\Admin\AnnonceurTrierController;
+use App\Http\Controllers\Dashboard\Admin\ClientTrierController;
 use App\Http\Controllers\Dashboard\Admin\InterditController;
 use App\Http\Controllers\Dashboard\Admin\OtpController;
 use App\Http\Controllers\Dashboard\Admin\TypedemarcheController;
 use App\Http\Controllers\Dashboard\Admin\CodeController;
+use App\Http\Controllers\Dashboard\Admin\GestionnaireTrierController;
+use App\Http\Controllers\Dashboard\Admin\trier\PublicationTrierController;
 
 // use App\Models\Commune;
 // use App\Models\Publication;
@@ -42,9 +46,11 @@ Route::prefix('admin')->group(function () {
     //activer un annonceurs
     // Route::get('statut/{id}',[AnnonceurController::class,'statut'])->name('annonceur.anStatut');
     Route::get('statutA/{id}',[AnnonceurController::class,'statutA'])->name('annonceur.statutA');
+    // route de triage de annonceurs
+    // Route::get('annonceurtrier',[AnnonceurController::class,'indexA'])->name('annonceur.indexA');
 
     // route de parrainage d'un annonceurs
-    // Route::get('statutParrain/{id}',[AnnonceurController::class,'statutParrain'])->name('annonceur.statutParrain');
+    Route::get('ParrainA/{id}',[AnnonceurController::class,'ParrainA'])->name('annonceur.ParrainA');
 
     // ONGLES CLIENTS
     Route::resource('clients',ClientController::class);
@@ -55,11 +61,13 @@ Route::prefix('admin')->group(function () {
     // ONgles gestionnaire
     Route::resource('gestionnaires',GestionnaireController::class);
      // activer les gestionnaires
-     Route::get('statutG/{id}',[GestionnaireController::class,'statutG'])->name('gestionnaire.statutG');
+    Route::get('statutG/{id}',[GestionnaireController::class,'statutG'])->name('gestionnaire.statutG');
+    //roleAdmin
+    Route::get('rAdmin/{id}',[GestionnaireController::class,'rAdmin'])->name('gestionnaire.rAdmin');
 
 
      // publication
-     Route::resource('publications',PublicationController::class);
+    Route::resource('publications',PublicationController::class);
      Route::get('statutPub/{id}',[PublicationController::class,'statutPub'])->name('publication.statutPub');
      Route:: post('/recherche-quartiers', 'PublicationController@rechercheQuartiers')->name('rechercheQuartiers');
      // budgets
@@ -87,6 +95,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('images', ImageController::class);
     Route::get('statutImage/{id}', [ImageController::class,'statutImage'])->name('image.statutImage');
     Route::post('/upload', [ImageController::class,'upload'])->name('uploadImage');
+
+    Route::post('/saveFileAndGetUrl', [ImageController::class, 'saveFileAndGetUrl'])->name('image.saveFileAndGetUrl');
      // Type de bien
      Route::resource('typedebiens', TypedebienController::class);
      Route::get('statutTypedebien/{id}', [TypedebienController::class, 'statutTypedebien'])->name('typedebien.statutTypedebien');
@@ -104,4 +114,14 @@ Route::prefix('admin')->group(function () {
      Route::resource('otps',OtpController::class);
      // code Qr
      Route::resource('codeQR', CodeController::class);
+
+
+     /*  -------------------------------------------------------------------
+         les route des  triage en fonction des element selectionner:
+         -------------------------------------------------------------------
+     */
+     Route::resource('annonceurtrier', AnnonceurTrierController::class);
+     Route::resource('clienttrier', ClientTrierController::class);
+     Route::resource('gestionnairetrier', GestionnaireTrierController::class);
+     Route::resource('publicationtrier', PublicationTrierController::class);
 });

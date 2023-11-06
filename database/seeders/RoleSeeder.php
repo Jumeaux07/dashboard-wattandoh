@@ -21,11 +21,11 @@ class RoleSeeder extends Seeder
             'created_by' => 'Wattandoh'
         ]);
         DB::table('roles')->insert([
-            'libelle' => 'Annonceur adminstrateur',
+            'libelle' => 'Gest Annonceur ',
             'created_by' => 'Wattandoh'
         ]);
         DB::table('roles')->insert([
-            'libelle' => 'Client adminstrateur',
+            'libelle' => 'Gest Client ',
             'created_by' => 'Wattandoh'
         ]);
     }

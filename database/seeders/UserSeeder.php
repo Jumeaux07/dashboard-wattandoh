@@ -17,16 +17,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('users')->insert([
-            'nom_prenoms'=>"Essis Cedric",
-            'email'=>"cedriczouzoua17@gmail.com",
-            'telephone'=>"0103772742",
-            'adresse'=>"Yopougon Koweit",
-            'password'=>Hash::make('12345678X'),
-            'statut_generique_id'=>2,
-            'created_by'=>"Wattandoh",
-            'role_id'=>1,
-        ]);
+        // DB::table('users')->insert([
+        //     'nom_prenoms'=>"Essis Cedric",
+        //     'email'=>"cedriczouzoua17@gmail.com",
+        //     'telephone'=>"0103772742",
+        //     'adresse'=>"Yopougon Koweit",
+        //     'password'=>Hash::make('12345678X'),
+        //     'statut_generique_id'=>2,
+        //     'created_by'=>"Wattandoh",
+        //     'role_id'=>1,
+        // ]);
         DB::table('users')->insert([
             'nom_prenoms'=>"tanguy nahi",
             'email'=>"tanguynahi1@gmail.com",
@@ -57,5 +57,6 @@ class UserSeeder extends Seeder
             'created_by'=>"Wattandoh",
             'role_id'=>1,
         ]);
+
     }
 }

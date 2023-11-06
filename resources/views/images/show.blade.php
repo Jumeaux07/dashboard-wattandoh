@@ -28,24 +28,19 @@
         <div class="container">
             <h1>Profil Image </h1>
             <hr>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <!-- Photo de profil -->
-                    <img src="{{ asset('storage/' . $image->url) }}" alt="Photo de profil" class="img-fluid rounded-circle">
-                </div>
-                <div class="col-md-8">
-                    <!-- Informations utilisateur -->
-                    {{-- <h3>{{$image->url}}</h3> --}}
-                    <img src="{{$image->url}}" alt="{{$image->url}}" class="img-fluid rounded-circle" height="90px" width="90px" d="image">
-
-                    {{-- <img id="imagePreview" src="" alt="Aperçu de l'image" width="80px" height="80px" class="img-fluid rounded-carre"> --}}
-                    <br><p>ID publication : {{$image->publication_id}}</p>
-                    {{-- <p>Numero de Telephone 2 : {{$client->phone2}}</p> --}}
-                    {{-- <p>Sexe: {{$client->sexe}}</p> --}}
-                    {{-- <p>Description : Compte client.</p> --}}
+            <div class="col-lg-12">
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="card-title">Reference de la  publication : {{$image->publication->reference}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle">Images in Bootstrap are made responsive with <code class="highlighter-rouge">.img-fluid</code>. <code class="highlighter-rouge">max-width: 100%;</code> and <code class="highlighter-rouge">height: auto;</code> are applied to the image so that it scales with the parent element.</h6>
+                        <img src="{{$image->url}}" class="img-fluid" alt="Responsive image">
+                    </div>
                 </div>
             </div>
+
+
 
             <div class="row mt-4">
                 <div class="col-md-12">

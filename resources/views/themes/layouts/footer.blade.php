@@ -1,15 +1,14 @@
-            <!-- Start Footerbar -->
+
             <div class="footerbar">
                 <footer class="footer">
                     <p class="mb-0">© 2023  watttandoh -  Dashboard app</p>
                 </footer>
             </div>
-            <!-- End Footerbar -->
+
         </div>
-        <!-- End Rightbar -->
+
     </div>
-    <!-- End Containerbar -->
-    <!-- Start js -->
+
     @stack('js')
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
@@ -30,8 +29,7 @@
     <script src="{{asset('assets/js/custom/custom-dashboard.js')}}"></script>
     <!-- Core js -->
     <script src="{{asset('assets/js/core.js')}}"></script>
-    <!-- End js -->
-    <!-- Datatable js -->
+
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/dataTables.buttons.min.js')}}"></script>
@@ -45,6 +43,7 @@
     <script src="{{asset('assets/plugins/datatables/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
     <script src="{{asset('assets/js/custom/custom-table-datatable.js')}}"></script>
+    <script src="{{ asset('assets/plugins/dropzone/dist/dropzone.js') }}"></script>
 
 
 </body>

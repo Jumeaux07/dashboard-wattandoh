@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Admin;
 
+use App\Models\Image;
 use App\Models\Budget;
 use App\Models\Commune;
 use App\Models\Interdit;
@@ -35,7 +36,7 @@ class PublicationController extends Controller
     public function index()
     {
         //
-        $data['subtitle'] = "Liste des publications";
+        $data['subtitle'] = "Liste Des Publications";
 
         //pour l'activité méné par l'utilisateur connecté
         $module = "Module Affichage  ";
@@ -129,10 +130,10 @@ class PublicationController extends Controller
         }
         // $interdits = $request->input('interdits');
         $publication = new Publication();
-        $publication->reference = htmlspecialchars($request->reference);// ici le travail demande par rapport a rendre la reference automatique
+        // $publication->reference = htmlspecialchars($request->reference);// ici le travail demande par rapport a rendre la reference automatique
 
-        // $publication->reference = htmlspecialchars($request->reference);
-        // // echo $publication->reference;
+         $publication->reference = "Pub 00";
+
         // dd($publication->reference);
 
         $publication->description = htmlspecialchars($request->description);
@@ -193,7 +194,9 @@ class PublicationController extends Controller
     public function show($id)
     {
         //
-        $data['publication'] = Publication::find($id);
+        $data['publication'] = Publication::where('id', $id)->with('images')->first();
+        // dd($data['publication'] = Publication::where('id', $id)->with('images')->first());
+
         $data['subtitle'] = "Detail d'une Publication";
 
         if($data['publication'] != null){
@@ -201,8 +204,8 @@ class PublicationController extends Controller
             $module = "Module Affichage";
             $action = " a affiché la page de detail d'une publication : {{$data['publication']->reference}} ";
             UserActivity::saveActivity($module,$action);
-
-            return view('publications.show', $data);
+            // $images =  Image::where('id', $id)->with('url');
+            return view('publications.show', $data); //, compact('images')
         }else{
             session()->flash('type','alert-danger');
             session()->flash('message',"publication introuvable");
@@ -233,6 +236,7 @@ class PublicationController extends Controller
         $typedemarches = TypeDeMarche::all();
         $interdits = Interdit::all();
         $typedebiens = TypeDeBien::all();
+
 
         return view('publications.edit', $data,compact('annonceurs', 'budgets','communes', 'quartiers','typedemarches', 'interdits', 'typedebiens'));
     }

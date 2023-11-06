@@ -17,10 +17,11 @@ class ClientSeeder extends Seeder
     {
         //
         DB::table('clients')->insert([
+        'sexe'=>"F",
         'nom_prenoms'=>"oulassouhm regina",
         'phone1'=>"0748480894",
         'phone2'=>"0769762258",
-        'sexe'=>"feminin",
+
         'password'=>"ok love",
         'quartier_id'=>1,
         // 'user_id'=>1,

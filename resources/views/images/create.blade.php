@@ -22,6 +22,8 @@
 </div>
 <!-- End Breadcrumbbar -->
 
+
+
  <!-- Start Contentbar -->
  <div class="contentbar">
     <div class="card">
@@ -35,8 +37,8 @@
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">url  <span class="text-danger" >*</span> </label>
-                        <input type="file" name="url" value="{{old('url')}}" class="form-control" id="image"  placeholder="Ex: image(.png , .jpg ) " accept="image/*">
-                        <img id="imagePreview" src="" alt="Aperçu de l'image"  class="img-fluid rounded-carre">
+                        <input type="file" name="url" value="{{old('url')}}" class="form-control" id="image"  placeholder="Ex: image(.png , .jpg ) " accept="image/*" >
+                        <img id="imagePreview" src="" alt="{{old('url')}}"  class="img-fluid rounded-carre">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Reference de la  Publication <span class="text-danger" >*</span> </label>
@@ -52,7 +54,39 @@
             </form>
         </div>
     </div>
+
+
+
+     {{-- modification a termine plus tard  --}}
+    {{-- <div class="row">
+
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            <div class="card m-b-30">
+                <div class="card-header">
+                    <h5 class="card-title">File upload</h5>
+                </div>
+                <div class="card-body">
+                    <form action="#" class="dropzone">
+                        <div class="fallback">
+                            <input name="file" type="file" multiple="multiple">
+                        </div>
+                    </form>
+                    <div class="text-center m-t-15">
+                        <button type="button" class="btn btn-primary">Upload File</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> --}}
  </div>
+
+
+    <!-- Start row -->
+
+
+
+
 
  <script>
     const imageInput = document.getElementById('image');

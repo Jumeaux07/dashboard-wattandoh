@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class StatutGenerateSeeder extends Seeder
+class ParrainageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,21 +15,22 @@ class StatutGenerateSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('statut_generiques')->insert([
-            'statut' => 0,
-            'description' => 'désactivé',
-            'created_by' => 'Wattandoh'
-        ]);
-        DB::table('statut_generiques')->insert([
-            'statut' => 1,
-            'description' => 'activé',
-            'created_by' => 'Wattandoh'
-        ]);
-        DB::table('statut_generiques')->insert([
-            'statut' => 3,
-            'description' => 'en attente',
-            'created_by' => 'Wattandoh'
-        ]);
+        //
 
+        DB::table('parrainages')->insert([
+            'statut' => 1,
+            'description' => 'Parrainé',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('parrainages')->insert([
+            'statut' => 2,
+            'description' => 'Parrain',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('parrainages')->insert([
+            'statut' => 3,
+            'description' => 'Aucun',
+            'created_by' => 'Wattandoh'
+        ]);
     }
 }

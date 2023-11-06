@@ -6,10 +6,11 @@ use App\Models\User;
 use App\Models\Commune;
 use App\Models\Rapport;
 use App\Models\Quartier;
+use App\Models\Parrainage;
 use App\Models\Publication;
 use App\Models\StatutGenerique;
-use Laravel\Sanctum\HasApiTokens;
 // use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -26,11 +27,12 @@ class Annonceur extends  Model
         'phone1',
         'phone2',
         'sexe',
-        'parrain',
+        // 'parrain',
         'password',
         'user_id',
         'quartier_id',
         'commune_id',
+        'parrainage_id',
         'statut_generique_id',
         'created_by',
 
@@ -38,6 +40,9 @@ class Annonceur extends  Model
 
     public function statut_generique(){
         return $this->belongsTo(StatutGenerique::class);
+    }
+    public function parrainage(){
+        return $this->belongsTo(Parrainage::class);
     }
 
     public function quartier(){

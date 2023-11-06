@@ -11,7 +11,10 @@ use App\Models\Annonceur;
 // use App\Models\Rendezvous;
 use App\Models\Rendezvous;
 use App\Models\TypeDeBien;
+// use App\Models\Publication;
+use App\Models\TypeDeMarche;
 use App\Models\StatutGenerique;
+use App\Observers\PublicationObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,9 +41,22 @@ class Publication extends Model
         'created_by',
     ];
     // public function setReferenceAttribute($value){
-    //     $this->attributes['reference'] = str_slug($value);
+    //     $this->attributes['reference'] = str_reference($value);
+    // }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::observe(PublicationObserver::class);
     // }
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function($publication){
+            $entier = Publication::count()+1;
+            $publication->reference = $publication->reference.''.$entier;
+        });
+    }
 
     public function statut_generique()
     {

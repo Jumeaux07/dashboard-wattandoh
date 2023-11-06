@@ -38,10 +38,7 @@
                         <input type="text" name="nom_prenoms" value="{{old('nom_prenoms')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Kouassi Yves">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
-                    {{-- <div class="form-group col-sm-6">
-                        <label for="exampleInputPassword1">Email <span class="text-danger" >*</span></label>
-                        <input type="email" name="email" value="{{old('email')}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: asde@gmail.com">
-                    </div> --}}
+
 
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Numéro de téléphone 1  <span class="text-danger" >*</span> </label>
@@ -53,10 +50,7 @@
                         <input type="text" name="phone2" value="{{old('phone2')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 0102030405">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
-                    {{-- <div class="form-group col-sm-6">
-                        <label for="exampleInputPassword1">Adresse <span class="text-danger" >*</span></label>
-                        <input type="text" name="adresse" value="{{old('adresse')}}" class="form-control" id="exampleInputPassword1" placeholder="Cocody Angre">
-                    </div> --}}
+
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Sexe  <span class="text-danger" >*</span> </label>
                         {{-- <input type="text" name="sexe" value="{{old('sexe')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Masculin "> --}}
@@ -79,15 +73,16 @@
                         <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="XXXXXXX">
                     </div>
 
-                    <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Code Parrainage   <span class="text-danger" >*</span> </label>
-                        {{-- <input type="text" name="parrain" value="{{old('parrain')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 0102030405"> --}}
+                    {{-- <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Statut   <span class="text-danger" >*</span> </label>
+
                         <select name="parrain" id="" class="form-control">
-                            {{-- <option value="" selected>A:</option> --}}
-                            <option value="parrain" selected>Active</option>
-                            <option value="pas parrain " selected>Desactiver</option>
+                            <option value="Aucun " selected>Aucun</option>
+                            <option value="parrain" selected>Parrains</option>
+                            <option value="Parrainé " selected>Parrainé</option>
+
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </form>

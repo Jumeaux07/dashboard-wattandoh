@@ -19,12 +19,15 @@ return new class extends Migration
             $table->string('phone1');
             $table->string('phone2')->nullable();
             $table->string('sexe');
-            $table->string('parrain');
+            // $table->string('parrain');
             $table->string('password');
             $table->unsignedBigInteger('quartier_id')->nullable();
             $table->foreign('quartier_id')->references('id')->on('quartiers')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('commune_id')->nullable();
             $table->foreign('commune_id')->references('id')->on('communes')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('parrainage_id')->nullable();
+            $table->foreign('parrainage_id')->references('id')->on('parrainages')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('statut_generique_id')->nullable();

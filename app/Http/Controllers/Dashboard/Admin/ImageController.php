@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\Models\Image;
 use App\Models\Publication;
+use Illuminate\Support\Str;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
@@ -62,58 +64,65 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-        $validator =  Validator::make($request->all(),[
-            // 'url'=>'required',
-            'url'=>'required|image|mimes:jpeg,png,gif|max:2048',
-            // dd('url'),
-            'publication_id'=> 'required',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     //
+    //     $validator =  Validator::make($request->all(),[
+    //         // 'url'=>'required',
+    //         'url'=>'required|image|mimes:jpeg,png,gif|max:2048',
+    //         // dd('url'),
+    //         'publication_id'=> 'required',
+    //     ]);
+    //     $imagePath = $request->file('url');  //->store('images', 'public')
+    //     $imageName = 'PUBLICATION'. time() . '_scaled_'.mt_rand(100000000, 999999999). '.'. $imagePath->getClientOriginalExtension();
 
-        if($validator->fails()){
-            session()->flash('type','alert-danger');
-            session()->flash('message','Erreur dans le formulaire');
-            return back()->withErrors($validator->errors())->withInput($request->input());
-        }
-        $imagePath = $request->file('url');  //->store('images', 'public')
-        $imageName = time() . '.'. $imagePath->getClientOriginalExtension();
-
-        // enregistre l image dans la bd
+    //     // enregistre l image dans le repertoire  Public/storage/image
+    //     $imagePath->storeAs('storage/images',$imageName,'public');
+    //     // creation de url de limage en utilisant le nom du domaine  configure
+    //     $imageUrl=URL::to('/storage/images' . $imageName);
 
 
-        // reduisez les dimensions de l 'image si necessaire
 
-        // $image =  Image::make(public_path("storage/$imagePath"));
-        // // redimensionnez l'image ici (par exemple ,a une largueur de 800px )
-        // $image ->resize(800,null, function($constraint){
-        //     $constraint->aspectRatio();
-        // });
-        $image = new Image();
-        // $image->url = htmlspecialchars($request->url);
-        $image->url = $imageName;
-        // $imagePath = $request->file('url')->store('images', 'public');
-        // $image->url = $request->file('url')->storage('photopubs');
-        // dd($image->url );
-        // $image = $request->file('url')->storage_path('photopubs');
-        $image->publication_id = $request->publication_id;
-        // $image->statut_generique_id = 2;
-        $image->created_by = auth()->user()->nom_prenoms;
-        if($image->save()){
-            $module = "Module utilisateur";
-            $action = " a créé une image : $image->url ";
-            UserActivity::saveActivity($module,$action);
-            session()->flash('type','alert-success');
-            session()->flash('message','image créé avec succès');
-            // list($width, $height) = getimagesize(storage_path('app/public/' . $imagePath));
-            return redirect()->route('images.index',['id'=>$image->id]);
-        }else{
-            session()->flash('type','alert-danger');
-            session()->flash('message','La création d\'une Image  a échoué');
-            return back()->withInput($request->input());
-        }
-    }
+    //     if($validator->fails()){
+    //         session()->flash('type','alert-danger');
+    //         session()->flash('message','Erreur dans le formulaire');
+    //         return back()->withErrors($validator->errors())->withInput($request->input());
+    //     }
+
+    //     // enregistre l 'image dans la base de donnees avec l url de l image
+
+
+    //     // reduisez les dimensions de l 'image si necessaire
+
+    //     // $image =  Image::make(public_path("storage/$imagePath"));
+    //     // // redimensionnez l'image ici (par exemple ,a une largueur de 800px )
+    //     // $image ->resize(800,null, function($constraint){
+    //     //     $constraint->aspectRatio();
+    //     // });
+    //     $image = new Image();
+    //     // $image->url = htmlspecialchars($request->url);
+    //     $image->url = $imageUrl;
+    //     // $imagePath = $request->file('url')->store('images', 'public');
+    //     // $image->url = $request->file('url')->storage('photopubs');
+    //     // dd($image->url );
+    //     // $image = $request->file('url')->storage_path('photopubs');
+    //     $image->publication_id = $request->publication_id;
+    //     // $image->statut_generique_id = 2;
+    //     $image->created_by = auth()->user()->nom_prenoms;
+    //     if($image->save()){
+    //         $module = "Module utilisateur";
+    //         $action = " a créé une image : $image->url ";
+    //         UserActivity::saveActivity($module,$action);
+    //         session()->flash('type','alert-success');
+    //         session()->flash('message','image créé avec succès');
+    //         // list($width, $height) = getimagesize(storage_path('app/public/' . $imagePath));
+    //         return redirect()->route('images.index',['id'=>$image->id]);
+    //     }else{
+    //         session()->flash('type','alert-danger');
+    //         session()->flash('message','La création d\'une Image  a échoué');
+    //         return back()->withInput($request->input());
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -249,6 +258,62 @@ class ImageController extends Controller
         $image = $request->file('url')->store('photopubs');
         return redirect()->back()->with('message','image créé avec succès');
 
+
+    }
+
+
+
+    // fonction envoyer par cedric pour enreistrement d'une image
+    public function store(Request $request ){
+        $validator =  Validator::make($request->all(),[
+            'url'=>'required|image|mimes:jpeg,png,gif|max:2048',
+            'publication_id'=> 'required',
+        ]);
+        //  $request->hasFile('image');
+            # code...
+            $image = $request->file('url');
+            $folder = '';
+            //   $imagePath = $request->file('url');
+            // generer un nom unique pour l'image
+            $imageName = time(). '.' . $image->getClientOriginalExtension();
+            // $imageName = 'PUBLICATION'. time() . '_scaled_'.mt_rand(100000000, 999999999). '.'. $imagePath->getClientOriginalExtension();
+            if (Str::contains($image->getMimeType(), 'image')) {
+                # code...
+                $folder = 'images';
+            }elseif (str::contains($image->getMimeType(),'video')) {
+                # code...
+                $folder = 'videos';
+            }else {
+                # code...
+            session()->flash('type','alert-danger');
+            session()->flash('message','Erreur dans le formulaire');
+            return back()->withErrors($validator->errors())->withInput($request->input());
+            }
+            // deplacer l'image vers le dosssier public
+            $image->move(public_path("$folder"), $imageName);
+            //recupere le chemin complet de l'image
+            $imagePath = url("$folder/$imageName");
+
+        $image = new Image();
+        $image->url = $imagePath;
+        $image->publication_id = $request->publication_id;
+        $image->created_by = auth()->user()->nom_prenoms;
+
+
+
+        if($image->save()){
+            $module = "Module utilisateur";
+            $action = " a créé une image : $image->url ";
+            UserActivity::saveActivity($module,$action);
+            session()->flash('type','alert-success');
+            session()->flash('message','image créé avec succès');
+
+            return redirect()->route('images.index',['id'=>$image->id]);
+        }else{
+            session()->flash('type','alert-danger');
+            session()->flash('message','La création d\'une Image  a échoué');
+            return back()->withInput($request->input());
+        }
 
     }
 

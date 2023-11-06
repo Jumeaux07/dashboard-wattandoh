@@ -100,7 +100,7 @@
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Commune <span class="text-danger" >*</span></label>
                         {{-- <input type="number" name="commune_id" value="{{$publication->commune_id}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: Identifiant commune"> --}}
-                        <select name="commune_id" id="exampleInputPassword1" class="form-control" value="{{$publication->commune_id}}">
+                        <select name="commune_id" id="commune" class="form-control" value="{{$publication->commune_id}}">
                             @foreach ($communes as $commune )
                             <option value="{{ $commune->id }}">{{ $commune ->libelle }}</option>
                             @endforeach
@@ -118,7 +118,7 @@
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Quartier <span class="text-danger" >*</span></label>
                         {{-- <input type="number" name="quartier_id" value="{{$publication->quartier_id}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: Identifiant budget"> --}}
-                        <select name="quartier_id" id="exampleInputPassword1" class="form-control" >
+                        <select name="quartier_id" id="quartier" class="form-control" >
                             @foreach ($quartiers as $quartier )
                             <option value="{{$publication->quartier_id}}">{{ $quartier ->libelle }}</option>
                             @endforeach
@@ -135,4 +135,39 @@
         </div>
     </div>
  </div>
+
+
+
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const communeSelect = document.getElementById('commune');
+        const quartierSelect = document.getElementById('quartier');
+        communeSelect.addEventListener("change", function(){
+            const selectedCommuneId = communeSelect.value;
+
+            // desactiver le menu deroulant des quartiers si aucune commune n'a ete selectionne
+            quartierSelect.disabled = !selectedCommuneId;
+            // efface  les options  precedentes
+            quartierSelect.innerHTML = "";
+            if (selectedCommuneId) {
+                 // Chargez les quartiers en fonction de la commune sélectionnée
+                 @foreach($quartiers as $quartier)
+                    if ({{ $quartier->commune_id }} == selectedCommuneId) {
+                        const option = document.createElement("option");
+                        option.value = {{ $quartier->id }};
+                        option.text = "{{ $quartier->libelle }}";
+                        quartierSelect.appendChild(option);
+                    }
+                @endforeach
+
+            }else {
+                // Si aucune commune n'est sélectionnée, affichez un message
+                const option = document.createElement("option");
+                option.text = "Sélectionnez d'abord une commune";
+                quartierSelect.appendChild(option);
+            }
+        });
+    });
+ </script>
 @endsection

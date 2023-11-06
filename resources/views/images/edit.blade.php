@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">url  <span class="text-danger" >*</span> </label>
-                        <input type="file" name="url" value="{{$image->url}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Kouassi Yves">
+                        <input type="file" name="url" value="{{$image->url}}" class="form-control" id="exampleInputEmail1" >
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
                     <div class="form-group col-sm-6">

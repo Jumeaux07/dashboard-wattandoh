@@ -21,12 +21,13 @@ class AnnonceurSeeder extends Seeder
             'phone1'=>"01020304",
             'phone2'=>"09080706",
             'sexe'=>"M",
-            'parrain'=>"P",
+            // 'parrain'=>"P",
 
             'password'=>bcrypt('1234567'),
             'user_id'=>1,
             'quartier_id'=>1,
             'commune_id'=>1,
+            'parrainage_id'=>1,
             'statut_generique_id'=>1,
             'created_by'=>"valide",
         ]);
@@ -35,11 +36,12 @@ class AnnonceurSeeder extends Seeder
             'phone1'=>"01020304",
             'phone2'=>"09080706",
             'sexe'=>"M",
-            'parrain'=>"N",
+            // 'parrain'=>"N",
             'password'=>bcrypt('1234567'),
             'user_id'=>1,
             'quartier_id'=>1,
             'commune_id'=>1,
+            'parrainage_id'=>2,
             'statut_generique_id'=>2,
             'created_by'=>"Vattandoh",
         ]);

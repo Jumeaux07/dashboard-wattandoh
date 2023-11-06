@@ -53,16 +53,7 @@
                         <input type="text" name="adresse" value="{{old('adresse')}}" class="form-control" id="exampleInputPassword1" placeholder="Cocody Angre">
                     </div>
 
-                    {{-- <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Role  <span class="text-danger" >*</span> </label>
 
-                        <select name="role_libelle" id="" class="form-control">
-                            <option value="" selected>Choisir le role:</option>
-                            <option value="Gestionnaire Client" selected>Gestionnaire Client</option>
-                            <option value="Gestionnaire Annonceur" selected>Gestionnaire Annonceur</option>
-                        </select>
-
-                    </div> --}}
 
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Mot de passe  <span class="text-danger" >*</span> </label>
@@ -72,6 +63,26 @@
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Confirmation <span class="text-danger" >*</span></label>
                         <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="XXXXXXX">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Role  <span class="text-danger" >*</span> </label>
+
+                        <select name="role_id" id="" class="form-control">
+                            {{-- <option value="" selected>Choisir le role:</option> --}}
+                            @foreach ($roles as $role )
+                                {{-- <option value="{{ $role->id }}">{{ $role->libelle }}</option> --}}
+                                @if ($role->id == 2)
+                                    <option value="{{ $role->id }}">{{ $role->libelle }}</option>
+                                @elseif ($role->id == 3)
+                                    <option value="{{ $role->id }}">{{ $role->libelle }}</option>
+                                @endif
+                            @endforeach
+
+                            {{-- <option value="{{ role}}" selected>Gestionnaire Client</option> --}}
+                            {{-- <option value="{{ role_id->"2" }}" selected>Gestionnaire Annonceur</option> --}}
+                        </select>
+
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>

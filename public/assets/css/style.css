@@ -27552,6 +27552,27 @@ mark {
   color: #ffffff;
 }
 
+
+.badge-yellow {
+    background-color: #dceb09;
+  }
+  .badge-yellow[href]:hover {
+    background-color: #deff26ee;
+  }
+  .badge-yellow[href]:focus {
+    background-color: #fbff26e7;
+  }
+
+  .badge-pink {
+    background-color: rgb(243, 191, 200);
+  }
+  .badge-pink[href]:hover {
+    background-color: pink;
+  }
+  .badge-pink[href]:focus {
+    background-color: pink;
+  }
+
 /*
 --------------------------------
     : Custom - Buttons css :
@@ -33468,6 +33489,12 @@ input[type=range]:focus {
   padding: 5px 0 10px 5px;
 }
 
+
+
+/*  style ajouter par rapport au bouton de trier  */
+
+
+
 /*
 ------------------------------------
     : Custom - Sweet Alert css :
@@ -34642,6 +34669,66 @@ table.focus-on tfoot tr.focused td {
     margin-top: 15px;
   }
 }
+
+
+
+
+
+/*   ajouter un style css consernant le bouton trier de la page index */
+
+/* .menu-principal {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-item {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #333;
+}
+
+.has-submenu .submenu-icon {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.sous-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.menu-item:hover .sous-menu {
+    display: block;
+}
+
+.sous-sous-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+.sous-sous-sous-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+.menu-item.has-submenu:hover .sous-menu,
+.menu-item.has-submenu:hover .sous-sous-menu {
+    display: block;
+} */
+
+
+
 /*
 -----------------------------------
     : Custom - Responsive css :

@@ -47,15 +47,11 @@
                                 <tr>
                                     {{-- <td>{{$image->url}}</td> --}}
                                     <td>
-                                        <img src="{{ asset('storage/' . $image->url) }}" alt="image affiche" width="50px" height="40px">
-
+                                        {{-- <img src="{{ asset('storage/' . $image->url) }}" alt="{{ asset('storage/' . $image->url) }}" width="50px" height="40px"> --}}
+                                        <img src="{{$image->url}}" alt="{{$image->url}}" width="50px" height="40px">
                                     </td>
                                     <td>{{$image->publication->reference}}</td>
-                                    {{-- @if ($image->statut_generique_id == 2)
-                                        <td><span class="badge badge-success">Actif</span></td>
-                                    @elseif ($image->statut_generique_id == 1)
-                                        <td><span class="badge badge-danger">Désactivé</span></td>
-                                    @endif --}}
+
                                     <td>{{date('d-m-Y à H:i', strtotime($image->created_at))}}</td>
                                     <td>
                                         <div class="single-dropdown">

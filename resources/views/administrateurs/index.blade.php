@@ -17,6 +17,7 @@
             <div class="widgetbar">
                 <a href="{{route('administrateurs.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un administrateur</button></a>
             </div>
+
         </div>
     </div>
 </div>
@@ -24,6 +25,58 @@
 
  <!-- Start Contentbar -->
  <div class="contentbar">
+
+{{--
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div id="nestable-menu" class="button-list text-center mt-2">
+                    <button type="button" class="btn btn-primary-rgba" data-action="expand-all">Recherche</button>
+                    <button type="button" class="btn btn-warning-rgba" data-action="collapse-all">Trier le resultat</button>
+                    <button type="button" class="btn btn-success-rgba" data-action="add-item">Add new item</button>
+                    <button type="button" class="btn btn-danger-rgba" data-action="replace-item">Replace item 10</button>
+
+                    <form action="#" method="post" >
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputEmail1">Nom & prenoms  <span class="text-danger" >*</span> </label>
+                                <input type="text" name="nom_prenoms" value="{{old('nom_prenoms')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Kouassi Yves">
+                            </div>
+
+
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputEmail1">Numéro de téléphone  <span class="text-danger" >*</span> </label>
+                                <input type="text" name="telephone" value="{{old('telephone')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 0102030405">
+                            </div>
+
+
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Date <span class="text-danger" >*</span></label>
+                                <input type="datetime-local"  class="form-control" id="exampleInputPassword1" >
+
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Status <span class="text-danger" >*</span></label>
+
+                                <select name="" id=""class="form-control" id="exampleInputPassword1">
+                                    <option value="">Actif</option>
+                                    <option value="">Desactivé</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary-rgba" data-action="expand-all">Recherche</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+
+
+
+
+
         <div class="card m-b-30">
             <div class="card-header">
                 <h5 class="card-title">{{ $subtitle ?? '' }}</h5>

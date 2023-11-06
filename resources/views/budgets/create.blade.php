@@ -48,12 +48,32 @@
 
 
 
-
-
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </form>
         </div>
     </div>
  </div>
+ {{-- <script>
+    const imageInput = document.getElementById('min');
+    const imagePreview = document.getElementById('max');
+
+    // imageInput.addEventListener('change', function () {
+    //     const file = this.files[0];
+    //     if (file) {
+    //         const reader = new FileReader();
+
+    //         reader.onload = function (e) {
+    //             imagePreview.src = e.target.result;
+    //         };
+
+    //         reader.readAsDataURL(file);
+    //     } else {
+    //         imagePreview.src = ''; // Efface l'aperçu si aucun fichier n'est sélectionné
+    //     }
+    // });
+    if ( imagePreview < imageInput) {
+        echo 'erreur';
+    }
+</script> --}}
 @endsection

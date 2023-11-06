@@ -39,6 +39,43 @@ class AnnonceurController extends Controller
 
         $data['annonceurs'] = Annonceur::all();
 
+        //   $sexe = $request->input('sexe');
+        //   $statut_generique_id =
+
+
+        // $sexe =  $request->input('sexe');
+        // $statut_generique_id = $request ->input('statut_generique');
+        // $parrainage_id = $request->input('parrainage');
+        // $data['annonceurs'] = Annonceur::with(['statut_generique', 'parrainage'])
+        //  ->when($sexe, function($query, $sexe){
+        //     return $query->where('sexe', $sexe);
+        //  })->when($statut_generique_id, function($query, $statut_generique_id){
+        //     return $query->whereHas('statut_generique', function ($query) use ($statut_generique_id){
+        //         $query->where('description', $statut_generique_id);
+        //     });
+        //  })->when($parrainage_id, function($query , $parrainage_id){
+        //     return $query->whereHas('parrainage', function($query) use ($parrainage_id){
+        //         $query->where('description', $parrainage_id);
+        //     });
+        //  })->get();
+
+
+        // $query = Annonceur::with(['statut_generique', 'parrainage']);
+        // if ($sexe) {
+        //     $query->where('sexe', $sexe);
+        // }
+        // if ($statut_generique_id) {
+        //     $query->whereHas('statut_generique', function($query) use ($statut_generique_id){
+        //         $query->where('id', $statut_generique_id);
+        //     });
+        // }
+        // if ($parrainage_id) {
+        //     $query->whereHas('parrainage', function($query) use ($parrainage_id){
+        //         $query->where('id', $parrainage_id);
+        //     });
+        // }
+        //  $annonceurs = $query->get();
+
         return view('annonceurs.index',$data);
     }
 
@@ -75,7 +112,7 @@ class AnnonceurController extends Controller
             'phone1' => 'required|min:10',
             'phone2' => 'required|min:10',
             'sexe' => 'required',
-            'parrain' => 'required',
+            // 'parrain' => 'required',
             'password' => 'required|string|min:7',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -91,12 +128,13 @@ class AnnonceurController extends Controller
         $annonceur->phone1 = htmlspecialchars($request->phone1);
         $annonceur->phone2 = htmlspecialchars($request->phone2);
         $annonceur->sexe = htmlspecialchars($request->sexe);
-        $annonceur->parrain = htmlspecialchars($request->parrain);
+        // $annonceur->parrain = htmlspecialchars($request->parrain);
 
         // $annonceur->parrain = boolValue($request->parrain);
         $annonceur->password = Hash::make($request->password);
         // $annonceur->role_id = 1;
         $annonceur->statut_generique_id = 2;
+        $annonceur->parrainage_id = 3;
         // $annonceur->statut_generique_id = 4;
         $annonceur->created_by = auth()->user()->nom_prenoms;
 
@@ -177,7 +215,7 @@ class AnnonceurController extends Controller
             'phone1' => 'required|min:10',
             'phone2' => 'required|min:10',
             'sexe' => 'required',
-            'parrain' => 'required',
+            // 'parrain' => 'required',
         ]);
 
         if($validator->fails()){
@@ -198,7 +236,7 @@ class AnnonceurController extends Controller
             $annonceur->phone1 =  htmlspecialchars($request->phone1);
             $annonceur->phone2 =  htmlspecialchars($request->phone2);
             $annonceur->sexe =  htmlspecialchars($request->sexe);
-            $annonceur->parrain =  htmlspecialchars($request->parrain);
+            // $annonceur->parrain =  htmlspecialchars($request->parrain);
 
             if($annonceur->save()){
                 session()->flash('type','alert-success');
@@ -245,6 +283,7 @@ class AnnonceurController extends Controller
             $action = " a procédé à la l'activation l'annonceur : {{$annonceur->nom_prenoms}}." ;
             session()->flash('message', 'L\'annonceur a bien été activé.');
         }
+
         $annonceur->save();
 
         UserActivity::saveActivity($module,$action);
@@ -253,4 +292,85 @@ class AnnonceurController extends Controller
     }
 
 
+    public function ParrainA( $id){
+        $annonceur = Annonceur::find($id);
+        if (!$annonceur){
+            session()->flash('type', 'alert-danger');
+            session()->flash('message', 'L\'annonceur est introuvable.');
+            return back();
+        }
+        $module = 'Module utilisateur';
+
+        if ($annonceur->parrainage_id == 3) {
+            $annonceur->parrainage_id = 1;
+            $action  = " l'annonceur : {{$annonceur->nom_prenoms}} est  parrainé  ";
+            session()->flash('message', 'l\'annonceur  est  parainé ');
+        }elseif ($annonceur->parrainage_id == 1) {
+
+            $annonceur->parrainage_id = 2;
+            $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
+            session()->flash('message', 'L\' annonceur  est un parrain');
+
+            // $annonceur->parrainage_id = 3;
+            // $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
+            // session()->flash('message', 'l\annonceur est Aucun ');
+        }
+        else {
+        //     // $annonceur->parrainage_id = 2;
+        //     // $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
+        //     // session()->flash('message', 'L\' annonceur  est un parrain');
+            $annonceur->parrainage_id = 3;
+            $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
+            session()->flash('message', 'l\annonceur est Aucun ');
+        }
+
+        $annonceur->save();
+
+        UserActivity::saveActivity($module,$action);
+        session()->flash('type', 'alert-success');
+        return redirect()->back();
+    }
+
+
+    // public function indexA(Request $request ,$id)
+    // {
+    //     $sexe =  $request->input('sexe');
+    //     $statut_generique_id = $request ->input('statut_generique');
+    //     $parrainage_id = $request->input('parrainage');
+    //     // $annonceurs = Annonceur::when($sexe, function($query ,$sexe){
+    //     //     return $query->where('sexe', $sexe);
+    //     // })->when($statut_generique_id, function($query  , $statut_generique_id){
+    //     //     return $query->where('statut_generique_id', $statut_generique_id);
+    //     // })->when($parrainage_id, function($query, $parrainage_id){
+    //     //     return $query->where('parrainage_id', $parrainage_id);
+    //     // })->get();
+    //     $query = Annonceur::with(['statut_generique', 'parrainage']);
+    //     if ($sexe) {
+    //         $query->where('sexe', $sexe);
+    //     }
+    //     if ($statut_generique_id) {
+    //         $query->whereHas('statut_generique', function($query) use ($statut_generique_id){
+    //             $query->where('id', $statut_generique_id);
+    //         });
+    //     }
+    //     if ($parrainage_id) {
+    //         $query->whereHas('parrainage', function($query) use ($parrainage_id){
+    //             $query->where('id', $parrainage_id);
+    //         });
+    //     }
+    //      $annonceurs = $query->get();
+    //     //  $data['annonceurs'] = Annonceur::all();
+    //     return view('annonceurs.index', compact('annonceurs'));
+    // }
+
+
 }
+// if ($annonceur->statut_generique_id == 4) {
+//     $annonceur->statut_generique_id = 5;
+//     $action  = " l'annonceur : {{$annonceur->nom_prenoms}} n'est plus parrain  ";
+//     session()->flash('message', 'l\'annonceur n est plus parain ');
+// }else {
+//     $annonceur->statut_generique_id = 4;
+//     $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
+//     session()->flash('message', 'L\' annonceur  est un parrain');
+// }

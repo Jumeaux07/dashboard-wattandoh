@@ -54,6 +54,20 @@
                         <input type="text" name="adresse" value="{{$gestionnaire->adresse}}" class="form-control" id="exampleInputPassword1" placeholder="Cocody Angre">
                     </div>
 
+
+
+
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Role  <span class="text-danger" >*</span> </label>
+
+                        <select name="role_id" id="" class="form-control">
+                            {{-- <option value="" selected>Choisir le role:</option> --}}
+                            <option value="3" selected>Gestionnaire Client</option>
+                            <option value="2" selected>Gestionnaire Annonceur</option>
+                        </select>
+
+                    </div>
+
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Mot de passe  <span class="text-danger" >*</span> </label>
                         <input type="password" name="password" @readonly(true) class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="XXXXXXX">

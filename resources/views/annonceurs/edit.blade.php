@@ -69,15 +69,15 @@
                         <input type="password" @readonly(true) name="password_confirmation" class="form-control" id="exampleInputPassword1" placeholder="XXXXXXX">
                     </div>
 
-                    <div class="form-group col-sm-6">
+                    {{-- <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1">Code parrainage <span class="text-danger" >*</span></label>
-                        {{-- <input type="text" name="adresse" value="{{$annonceur->adresse}}" class="form-control" id="exampleInputPassword1" placeholder="Cocody Angre"> --}}
+
                         <select name="parrain" id="" class="form-control">
-                            {{-- <option value="" selected>Choisir le Sexe:</option> --}}
+
                             <option value="parrain" selected>Active</option>
                             <option value="pas parrain " selected>Desactiver</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>

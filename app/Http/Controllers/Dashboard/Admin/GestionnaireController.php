@@ -7,10 +7,20 @@ use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
-use Database\Seeders\RoleSeeder;
+// use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+
+
+
+// use Illuminate\Http\Request;
+// use App\Http\Controllers\Controller;
+// use App\Models\User;
+// use App\Models\UserActivity;
+// use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Facades\View;
 
 class GestionnaireController extends Controller
 {
@@ -33,7 +43,7 @@ class GestionnaireController extends Controller
         //
         $data['subtitle'] = "Liste des gestionnaires";
 
-        //pour l'activité méné par l'utilisateur connecté
+        //pour l'activité méné par l'utilisateur connecté gesionnaire annonceurs
         $module = "Module Utilisateur ";
         $action = " a consulté la liste des gestionnaires annonceurs ";
         UserActivity::saveActivity($module,$action);
@@ -43,15 +53,19 @@ class GestionnaireController extends Controller
 
         $data['subtitle'] = "Liste des gestionnaires";
 
-        //pour l'activité méné par l'utilisateur connecté
+        //pour l'activité méné par l'utilisateur connecté gestionnaire clients
         $module = "Module Utilisateur ";
         $action = " a consulté la liste des gestionnaires Clients ";
         UserActivity::saveActivity($module,$action);
 
         $data['gestionnaires'] = User::where('role_id',3)->get();
 
+        //
+        // $roles = Role::all();compact('roles')
 
-        return view('gestionnaires.index',$data);
+
+
+        return view('gestionnaires.index',$data, );
     }
 
     /**
@@ -69,8 +83,10 @@ class GestionnaireController extends Controller
         $action = " a affiché la page de création d'un gestionnaire Annonceurs";
 
         UserActivity::saveActivity($module,$action);
+        // $roles = Role::where('id')->get();
+        $roles = Role::all();
 
-        return view('gestionnaires.create',$data);
+        return view('gestionnaires.create',$data, compact('roles'));
     }
 
     /**
@@ -87,7 +103,7 @@ class GestionnaireController extends Controller
             'email' => 'required|email|unique:users,email',
             'telephone' => 'required|min:10',
             'adresse' => 'required',
-            // 'role_libelle'=>'required',
+            'role_id'=>'required',
             'password' => 'required|string|min:7',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -105,6 +121,7 @@ class GestionnaireController extends Controller
         $gestionnaire->adresse = htmlspecialchars($request->adresse);
         $gestionnaire->password = Hash::make($request->password);
         $gestionnaire->role_id = 2;
+        // $gestionnaire->role_id = $request ->role_id;
         $gestionnaire->statut_generique_id = 2;
         $gestionnaire->created_by = auth()->user()->nom_prenoms;
 
@@ -116,6 +133,7 @@ class GestionnaireController extends Controller
         $gestionnaire->adresse = htmlspecialchars($request->adresse);
         $gestionnaire->password = Hash::make($request->password);
         $gestionnaire->role_id = 3;
+        // $gestionnaire->role_id = $request ->role_id;
         $gestionnaire->statut_generique_id = 2;
         $gestionnaire->created_by = auth()->user()->nom_prenoms;
 
@@ -262,6 +280,42 @@ class GestionnaireController extends Controller
             $gestionnaire->statut_generique_id = 2;
             $action = " a procédé à la l'activation l'gestionnaire : {{$gestionnaire->nom_prenoms}}." ;
             session()->flash('message', 'L\'gestionnaire a bien été activé.');
+        }
+        $gestionnaire->save();
+
+        UserActivity::saveActivity($module,$action);
+        session()->flash('type', 'alert-success');
+        return redirect()->back();
+    }
+
+
+    public function rAdmin( $id){
+        $gestionnaire = User::find($id);
+        if (!$gestionnaire){
+            session()->flash('type', 'alert-danger');
+            session()->flash('message', 'L\'gestionnaire est introuvable.');
+            return back();
+        }
+        $module = 'Module utilisateur';
+        if ($gestionnaire->role_id == 3) {
+            // $gestionnaire -> role_id = 3;
+            // $action = " a change le statut  du gestionnaire : {{$gestionnaire->nom_prenoms}}." ;
+            // session()->flash('message', 'Le gestionnaire a recu le statut du gestionnaire client.');
+
+
+            $gestionnaire->role_id = 2;
+            $action = " a change le statut  du gestionnaire : {{$gestionnaire->nom_prenoms}}." ;
+            session()->flash('message', 'Le gestionnaire a recu le statut du gestionnaire annonceur.');
+        }else{
+            // $gestionnaire->role_id = 2;
+            // $action = " a change le statut  du gestionnaire : {{$gestionnaire->nom_prenoms}}." ;
+            // session()->flash('message', 'Le gestionnaire a recu le statut du gestionnaire annonceur.');
+
+
+
+            $gestionnaire -> role_id = 3;
+            $action = " a change le statut  du gestionnaire : {{$gestionnaire->nom_prenoms}}." ;
+            session()->flash('message', 'Le gestionnaire a recu le statut du gestionnaire client.');
         }
         $gestionnaire->save();
 
