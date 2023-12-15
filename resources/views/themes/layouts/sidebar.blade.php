@@ -52,7 +52,7 @@
                     </a>
                     <ul class="vertical-submenu">
 
-                        <li><a href="#">Point des rendez-vous</a></li>
+                        <li><a href="{{ Route('pointrendezvous.index') }}">Point des rendez-vous</a></li>
                         <li><a href="#">Rapport des Marches</a></li>
                         <li><a href="#">Recus</a></li>
 

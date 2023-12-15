@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputPassword1"> Numéro de téléphone 1<span class="text-danger" >*</span></label>
-                        <input type="email" @readonly(true) name="phone1" value="{{$annonceur->phone1}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: asde@gmail.com">
+                        <input type="text"  name="phone1" value="{{$annonceur->phone1}}" class="form-control" id="exampleInputPassword1" placeholder="Ex: asde@gmail.com">
                     </div>
 
                     <div class="form-group col-sm-6">
@@ -58,7 +58,15 @@
                             <option value="M" selected>Masculin</option>
                         </select>
                     </div>
-
+                    <div class="form-group col-sm-6">
+                        <label for="exampleInputPassword1">Statut <span class="text-danger" >*</span></label>
+                        {{-- <input type="text" name="adresse" value="{{$annonceur->adresse}}" class="form-control" id="exampleInputPassword1" placeholder="Cocody Angre"> --}}
+                        <select name="parrain" id="" class="form-control">
+                            <option value="" selected>Choisir le statut:</option>
+                            <option value="Parrain" selected>Parrain</option>
+                            <option value="Aucun" selected>Aucun</option>
+                        </select>
+                    </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Mot de passe  <span class="text-danger" >*</span> </label>
                         <input type="password" name="password" @readonly(true) class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="XXXXXXX">

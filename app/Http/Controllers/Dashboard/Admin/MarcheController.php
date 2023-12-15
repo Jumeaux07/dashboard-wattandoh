@@ -18,10 +18,10 @@ class MarcheController extends Controller
     {
         $this->middleware('admin');
 
-        View::share("module","Module utilisateur");
-        View::share("title","Gestion des utilisateurs");
+        View::share("module","Module Rubriques");
+        View::share("title","Gestion des Rubriques");
 
-        View::share( 'menu', "Utilisateurs" );
+        View::share( 'menu', "Rubriques" );
     }
     /**
      * Display a listing of the resource.
@@ -85,7 +85,7 @@ class MarcheController extends Controller
         $marche->rendezvous_id = $request->rendezvous_id;
         $marche->client_id = $request->client_id;
         $marche->publication_id = $request->publication_id;
-        $marche->statut_generique_id = 2;
+        $marche->statut_generique_id = 4;
         $marche->created_by = auth()->user()->nom_prenoms;
         if($marche->save()){
             $module = "Module utilisateur";
@@ -213,10 +213,10 @@ class MarcheController extends Controller
         }
         $module = 'Module utilisateur';
 
-        if ($marche->statut_generique_id == 2){
+        if ($marche->statut_generique_id == 4){
             $marche->statut_generique_id = 1;
-            $action = " a désactivé un marche de : {{$marche->reference}}." ;
-            session()->flash('message', 'Le marche a bien été désactivé.');
+            $action = " a perdu un marche de : {{$marche->reference}}." ;
+            session()->flash('message', 'Le marche a bien été  perdu.');
         }else{
             $marche->statut_generique_id = 2;
             $action = " a procédé à la l'activation d'un marche  de  : {{$marche->reference}}." ;

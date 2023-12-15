@@ -31,5 +31,35 @@ class StatutGenerateSeeder extends Seeder
             'created_by' => 'Wattandoh'
         ]);
 
+
+        // destine a la table rapport
+
+        DB::table('statut_generiques')->insert([
+            'statut' => 4,
+            'description' => 'en cours',
+            'created_by' => 'Wattandoh'
+        ]);
+
+
+        DB::table('statut_generiques')->insert([
+            'statut' => 7,
+            'description' => 'repporté ',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('statut_generiques')->insert([
+            'statut' => 6,
+            'description' => 'annulé ',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('statut_generiques')->insert([
+            'statut' => 8,
+            'description' => 'effectué ',
+            'created_by' => 'Wattandoh'
+        ]);
+        DB::table('statut_generiques')->insert([
+            'statut' => 5,
+            'description' => 'terminé ',
+            'created_by' => 'Wattandoh'
+        ]);
     }
 }

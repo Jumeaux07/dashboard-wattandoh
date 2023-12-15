@@ -21,6 +21,10 @@ return new class extends Migration
             $table->foreign('publication_id')->references('id')->on('publications')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('annonceur_id');
+            $table->foreign('annonceur_id')->references('id')->on('annonceurs')->onDelete('cascade')->onUpdate('cascade');
+
             $table->unsignedBigInteger('statut_generique_id');
             $table->foreign('statut_generique_id')->references('id')->on('statut_generiques')->onDelete('cascade')->onUpdate('cascade');
             $table->string('created_by');

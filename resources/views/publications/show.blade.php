@@ -60,15 +60,14 @@
             <div class="card-body">
                 <h6 class="card-subtitle">{{$publication->description}} <code class="highlighter-rouge">piece : {{$publication->piece}}</code>. <code class="highlighter-rouge"> caution : {{$publication->caution}}</code>  are applied to the image so that it scales with the parent element.</h6>
                 {{-- <img src="{{ asset('assets/images/ui-images/image-responsive.jpg') }}" class="img-fluid" alt="Responsive image"> --}}
-                <img src="{{$publication->images}}" alt="{{$publication->images}}" class="img-fluid">
-                {{-- <img src="{{$image->url}}" alt="{{$image->url}}" class="img-fluid"> --}}
-                {{-- @foreach ($images as $image )
-                <img src="{{$image->url}}" alt="{{$image->url}}" class="img-fluid">
 
-                @endforeach --}}
-                {{-- @foreach ($data as $publication )
-                <img src="{{$publication->images}}" alt="{{$publication->images}}" class="img-fluid">
-                @endforeach --}}
+                {{-- <img src="{{$publication->images}}" alt="{{$publication->images}}" class="img-fluid"> --}}
+
+
+
+                @foreach ($publication->images as $image )
+                <img src="{{asset($image->url)}}" alt="{{$image->url}}" class="img-fluid"> <br><br>
+                @endforeach
             </div>
         </div>
         </div>

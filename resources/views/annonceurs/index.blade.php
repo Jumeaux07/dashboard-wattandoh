@@ -72,14 +72,12 @@
 
                             <div class="form-group col-sm-6">
                                 <label for="exampleInputEmail1">Statut  <span class="text-danger" >*</span> </label>
-                                <select name="parrainage" id=""class="form-control" id="exampleInputPassword1">
+                                <select name="parrain" id=""class="form-control" id="exampleInputPassword1">
                                     <option value="">Tous</option>
-                                    {{-- @foreach ($parrainages as $parrainage )
-                                    <option value="{{ $parrainage->id }}">{{ $parrainage->description }}</option>
-                                    @endforeach --}}
-                                    <option value="3">Aucun</option>
-                                    <option value="1">Parrainé</option>
-                                    <option value="2">Parain</option>
+
+                                    <option value="Aucun">Aucun</option>
+
+                                    <option value="Parrain">Parain</option>
 
 
                                 </select>
@@ -134,12 +132,17 @@
                         <tbody>
                             @foreach ($annonceurs as $annonceur)
                                 <tr>
-                                    @if ($annonceur->parrainage_id == 3)
+                                    {{-- @if ($annonceur->parrainage_id == 3)
                                         <td><span class="badge badge-yellow">{{ $annonceur->parrainage->description }}</span></td>
                                         @elseif ($annonceur->parrainage_id == 1)
                                         <td><span class="badge badge-default"> {{ $annonceur->parrainage->description }} </span></td>
                                         @elseif ($annonceur->parrainage_id == 2)
                                         <td><span class="badge badge-warning"> {{ $annonceur->parrainage->description }}</span></td>
+                                    @endif --}}
+                                    @if  ($annonceur->parrain == "Parrain")
+                                        <td><span class="badge badge-warning"> Parrain</span></td>
+                                    @elseif($annonceur->parrain == "Aucun")
+                                        <td><span class="badge badge-yellow">Aucun</span></td>
                                     @endif
                                     <td>{{$annonceur->nom_prenoms}}</td>
                                     <td>{{$annonceur->phone1}}</td>
@@ -168,7 +171,7 @@
                                                 </button>
 
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('annonceurs.show',$annonceur->id )}}"> <i class="feather icon-eye"></i> Voir</a>
+                                                    <a class="dropdown-item" href="{{route('annonceurs.show',$annonceur->id )}}"> <i class="feather icon-user"></i> Profit</a>
                                                     <a class="dropdown-item" href="{{route('annonceurs.edit', $annonceur->id)}}"> <i class="feather icon-edit" ></i> Modifier</a>
                                                     @if ($annonceur->statut_generique_id == 2)
                                                     <a class="dropdown-item" href="{{route('annonceur.statutA',$annonceur->id )}}"> <i class="fa fa-toggle-off"></i> Desactiver</a>
@@ -176,7 +179,7 @@
                                                     @if ($annonceur->statut_generique_id == 1)
                                                     <a class="dropdown-item" href="{{route('annonceur.statutA',$annonceur->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
                                                     @endif
-                                                    @if ($annonceur->parrainage_id == 3)
+                                                    {{-- @if ($annonceur->parrainage_id == 3)
                                                     <a class="dropdown-item" href="{{route('annonceur.ParrainA',$annonceur->id )}}"> <i class="fa fa-toggle-off"></i> Parrainé </a>
                                                     @endif
                                                     @if ($annonceur->parrainage_id == 1)
@@ -184,7 +187,15 @@
                                                     @endif
                                                     @if ($annonceur->parrainage_id == 2)
                                                     <a class="dropdown-item" href="{{route('annonceur.ParrainA',$annonceur->id )}}"> <i class="fa fa-toggle-on"></i> Aucun</a>
+                                                    @endif --}}
+                                                    @if ($annonceur->parrain == "Aucun")
+                                                    <a class="dropdown-item" href="{{route('annonceur.parrainage',$annonceur->id )}}"> <i class="fa fa-toggle-off"></i> Parrain </a>
                                                     @endif
+                                                    @if ($annonceur->parrain == "Parrain")
+                                                    <a class="dropdown-item" href="{{route('annonceur.parrainage',$annonceur->id )}}"> <i class="fa fa-toggle-on"></i>Aucun </a>
+                                                    @endif
+                                                    <a class="dropdown-item" href="{{route('annonceur.rendezvousParAnnonceur',$annonceur->id )}}"> <i class="fa fa-calendar-o"></i> Rendezvous</a>
+                                                    <a class="dropdown-item" href="{{route('annonceur.PublicationParAnnonceur',$annonceur->id )}}"> <i class="fa fa-picture-o"></i> Publication</a>
 
 
                                                 </div>

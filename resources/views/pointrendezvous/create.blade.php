@@ -30,34 +30,33 @@
         </div>
         <div class="card-body">
             <h6 class="card-subtitle">Les champs qui sont marqués par ( <span class="text-danger" >*</span> ) sont  obigatoires</h6>
-            <form action="{{route('rendezvous.update', $rendezvou->id)}}" method="post" >
-                @method('put')
+            <form action="{{route('rendezvous.store')}}" method="post" >
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Reference  <span class="text-danger" >*</span> </label>
-                        <input type="text" name="reference" value="{{$rendezvou->reference}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: jour....">
+                        <input type="text" name="reference" value="{{old('reference')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: jour...">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
 
 
                     <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">reference publication  <span class="text-danger" >*</span> </label>
-                        {{-- <input type="number" name="publication_id" value="{{$rendezvou->publication_id}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
+                        <label for="exampleInputEmail1"> reference Pulication  <span class="text-danger" >*</span> </label>
+                        {{-- <input type="number" name="publication_id" value="{{old('publication_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
                         <select name="publication_id" class="form-control" id="exampleInputEmail1" >
                             @foreach ($publications as $publication )
-                            <option value="{{$rendezvou->publication_id}}">{{ $publication->reference }}</option>
+                            <option value="{{ $publication->id }}">{{ $publication->reference }}</option>
                             @endforeach
 
                         </select>
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1"> Client  <span class="text-danger" >*</span> </label>
-                        {{-- <input type="number" name="client_id" value="{{$rendezvou->client_id}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
+                        <label for="exampleInputEmail1">Client <span class="text-danger" >*</span> </label>
+                        {{-- <input type="number" name="client_id" value="{{old('client_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
                         <select name="client_id" class="form-control" id="exampleInputEmail1" >
                             @foreach ($clients as $client )
-                            <option value="{{$rendezvou->client_id}}">{{ $client ->nom_prenoms }}</option>
+                            <option value="{{ $client ->id }}">{{ $client ->nom_prenoms }}</option>
 
                             @endforeach
 
@@ -65,11 +64,11 @@
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1"> Annonceur  <span class="text-danger" >*</span> </label>
-                        {{-- <input type="number" name="client_id" value="{{$rendezvou->client_id}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
+                        <label for="exampleInputEmail1">Annonceur <span class="text-danger" >*</span> </label>
+                        {{-- <input type="number" name="client_id" value="{{old('client_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
                         <select name="annonceur_id" class="form-control" id="exampleInputEmail1" >
                             @foreach ($annonceurs as $annonceur )
-                            <option value="{{$rendezvou->annonceur_id}}">{{ $annonceur ->nom_prenoms }}</option>
+                            <option value="{{ $annonceur ->id }}">{{ $annonceur ->nom_prenoms }}</option>
 
                             @endforeach
 
@@ -77,9 +76,9 @@
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="exampleInputEmail1">Date <span class="text-danger" >*</span> </label>
-                        <input type="datetime-local" name="date" value="{{$rendezvou->date}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+                        <label for="exampleInputEmail1">Date  <span class="text-danger" >*</span> </label>
+                        <input type="datetime-local" name="date" value="{{old('date')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: date">
+
                     </div>
 
 

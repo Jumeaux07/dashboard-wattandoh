@@ -25,14 +25,14 @@
  <!-- Start Contentbar -->
  <div class="contentbar">
 
-    <div class="col-lg-12" style="position: absolue;">
+    {{-- <div class="col-lg-12" style="position: absolue;">
         <div class="card m-b-30">
             <div class="card-body">
                 <div id="nestable-menu" class="button-list text-center mt-2">
 
                     <a href="{{route('rendezvous.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un Rendez Vous</button></a>
 
-                    {{-- <button type="button" class="btn btn-danger-rgba" data-action="replace-item">Exporter</button> --}}
+
 
 
 
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
         <div class="card m-b-30">
@@ -77,36 +77,31 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Reference</th>
-                            <th>date</th>
-                            <th>publications </th>
-                            <th>clients / tel </th>
-                            {{-- <th>tel client </th> --}}
-                            <th>annonceurs / tel </th>
-                            {{-- <th>tel annonceur </th> --}}
-                            <th>Statut</th>
-                            <th>Date de creation</th>
+                            <th>Reference Rapport</th>
+                            <th>Statut du rapport</th>
+                            <th>Reference du rendez vous </th>
+                            <th>Etat du rendez vous</th>
+                            <th>Date de creation du rapport</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($rendezvous as $rendezvou)
+                            @foreach ($rapports as $rapport )
+                            <tr>
+                                <td>{{ $rapport->reference }}</td>
+                                  @if ($rapport->statut_generique_id == 2)
+                                    <td><span class="badge badge-success">Actif</span></td>
+                                @elseif ($rapport->statut_generique_id == 1)
+                                    <td><span class="badge badge-danger">Désactivé</span></td>
+                                @endif
+                            </tr>
+
+                        @endforeach
                                 <tr>
                                     <td>{{$rendezvou->reference}}</td>
-                                    <td>{{$rendezvou->date}}</td>
-                                    <td>{{$rendezvou->publication->reference}}</td>
-                                    <td>{{$rendezvou->client->nom_prenoms}} / {{$rendezvou->client->phone1}}</td>
-                                    {{-- <td>{{$rendezvou->client->phone1}}</td> --}}
-
-                                    <td>{{$rendezvou->annonceur->nom_prenoms}} / {{$rendezvou->annonceur->phone1}}</td>
-                                    {{-- <td>{{$rendezvou->annonceur->phone1}}</td> --}}
-
                                     @if ($rendezvou->statut_generique_id == 3)
-
-                                    {{-- @if ($rendezvou->created_at = $rendezvou->date  )
-                                     {{ $rendezvou->statut_generique_id == 8 }}
-                                    @endif --}}
-
                                         <td><span class="badge badge-primary">Attente</span></td>
                                         @elseif ($rendezvou->statut_generique_id == 4)
                                             <td><span class="badge badge-secondary">en Cours</span></td>
@@ -119,13 +114,12 @@
                                         @elseif ($rendezvou->statut_generique_id == 8)
                                         <td><span class="badge badge-success">termine</span></td>
                                     @endif
-
                                     <td>{{date('d-m-Y à H:i', strtotime($rendezvou->created_at))}}</td>
                                     <td>
                                         <div class="single-dropdown">
                                             <div class="dropdown">
 
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{-- <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Action
                                                 </button>
 
@@ -133,21 +127,21 @@
                                                     <a class="dropdown-item" href="{{route('rendezvous.show',$rendezvou->id )}}"> <i class="feather icon-eye"></i> Voir</a>
                                                     <a class="dropdown-item" href="{{route('rendezvous.edit', $rendezvou->id)}}"> <i class="feather icon-edit" ></i> Modifier</a>
                                                     @if ($rendezvou->statut_generique_id == 3)
-                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> termine</a>
+                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> en cours</a>
                                                     @endif
-                                                    @if ($rendezvou->statut_generique_id == 8)
-                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> en cours  </a>
+                                                    @if ($rendezvou->statut_generique_id == 4)
+                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> repporté</a>
                                                     @endif
 
-                                                    @if ($rendezvou->statut_generique_id == 4)
-                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> repporté </a>
-                                                    @endif
                                                     @if ($rendezvou->statut_generique_id == 5)
-                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> annulé  </a>
+                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> annulé</a>
                                                     @endif
                                                     @if ($rendezvou->statut_generique_id == 6)
-                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i>effectué </a>
+                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i> effectué </a>
                                                     @endif
+                                                    @if ($rendezvou->statut_generique_id == 7)
+                                                    <a class="dropdown-item" href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"> <i class="fa fa-toggle-off"></i>termine </a>
+                                                    @endif --}}
                                                 </div>
                                             </div>
                                         </div>

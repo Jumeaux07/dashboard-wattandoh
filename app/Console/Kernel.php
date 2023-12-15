@@ -16,7 +16,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('update:rendezvous:statut')->daily(); // Exécuter tous les jours
     }
+
 
     /**
      * Register the commands for the application.

@@ -242,4 +242,19 @@ class ClientController extends Controller
         session()->flash('type', 'alert-success');
         return redirect()->back();
     }
+
+
+    public function rendezvousParClient($id){
+        $data['subtitle'] = "Liste des rendez vous d'un client";
+
+        //pour l'activité méné par l'utilisateur connecté
+        $module = "Module Utilisateur ";
+        $action = " a consulté la liste des rendez vous d'un client";
+        UserActivity::saveActivity($module,$action);
+        // recupere l'annonceur et ses rendez vouus
+        $client = Client::with('rdv')->findOrFail($id);
+
+        // Retourne vers la view de l'affichage des rendezvous des annonceur
+        return view('clients.liste', ['client'=> $client], $data);
+    }
 }

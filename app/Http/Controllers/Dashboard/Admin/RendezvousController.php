@@ -8,6 +8,7 @@ use App\Models\Publication;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Annonceur;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,10 +18,10 @@ class RendezvousController extends Controller
     {
         $this->middleware('admin');
 
-        View::share("module","Module utilisateur");
-        View::share("title","Gestion des utilisateurs");
+        View::share("module","Module Rubrique");
+        View::share("title","Gestion des Rubriques");
 
-        View::share( 'menu', "Utilisateurs" );
+        View::share( 'menu', "Rubriques" );
     }
     /**
      * Display a listing of the resource.
@@ -38,8 +39,9 @@ class RendezvousController extends Controller
         $data['subtitle'] =  "Listes des Rendez Vous";
         $publications = Publication::all();
         $clients = Client::all();
+        $annonceurs = Annonceur::all();
 
-        return view('rendezvous.index', $data, compact('publications', 'clients'));
+        return view('rendezvous.index', $data, compact('publications', 'clients', 'annonceurs'));
     }
 
     /**
@@ -59,8 +61,9 @@ class RendezvousController extends Controller
         UserActivity::saveActivity($module,$action);
         $publications = Publication::all();
         $clients = Client::all();
+        $annonceurs = Annonceur::all();
 
-        return view('rendezvous.create',$data, compact('publications','clients'));
+        return view('rendezvous.create',$data, compact('publications','clients', 'annonceurs'));
     }
 
     /**
@@ -77,6 +80,7 @@ class RendezvousController extends Controller
             'date'=> 'required',
             'publication_id' => 'required',
             'client_id' => 'required',
+            'annonceur_id' => 'required',
         ]);
         if($validator->fails()){
             session()->flash('type','alert-danger');
@@ -88,7 +92,8 @@ class RendezvousController extends Controller
         $rendezvou->date = htmlspecialchars($request->date);
         $rendezvou->publication_id =  $request->publication_id;
         $rendezvou->client_id =  $request->client_id;
-        $rendezvou->statut_generique_id = 2;
+        $rendezvou->annonceur_id =  $request->annonceur_id;
+        $rendezvou->statut_generique_id = 3;
         $rendezvou->created_by = auth()->user()->nom_prenoms;
         if($rendezvou->save()){
             //pour l'activité méné par l'utilisateur connecté
@@ -148,7 +153,8 @@ class RendezvousController extends Controller
         UserActivity :: saveActivity('$module', '$action');
         $publications = Publication::all();
         $clients = Client::all();
-        return view('rendezvous.edit', $data, compact('publications','clients'));
+        $annonceurs = Annonceur::all();
+        return view('rendezvous.edit', $data, compact('publications','clients','annonceurs'));
     }
 
     /**
@@ -166,6 +172,7 @@ class RendezvousController extends Controller
             'date'=> 'required',
             'publication_id' => 'required',
             'client_id' => 'required',
+            'annonceur_id' => 'required',
         ]);
         if($validator->fails()){
             session()->flash('type','alert-danger');
@@ -182,6 +189,7 @@ class RendezvousController extends Controller
             $rendezvou->date =  htmlspecialchars($request->date);
             $rendezvou->publication_id =  htmlspecialchars($request->publication_id);
             $rendezvou->client_id =  htmlspecialchars($request->client_id);
+            $rendezvou->annonceur_id =  htmlspecialchars($request->annonceur_id);
             if($rendezvou->save()){
                 session()->flash('type','alert-success');
                 session()->flash('message','Les informations d\' un rendezvous ont bien été modifiées');
@@ -209,6 +217,7 @@ class RendezvousController extends Controller
     {
         //
     }
+    //  modification par rapport a la statut de rendez vous ( en attente , en cours , terminé,  annulé ,repporté ou effectué)
     public function statutRendezvous( $id){
         $rendezvou = Rendezvous::find($id);
         if (!$rendezvou){
@@ -218,14 +227,44 @@ class RendezvousController extends Controller
         }
         $module = 'Module utilisateur';
 
-        if ($rendezvou->statut_generique_id == 2){
-            $rendezvou->statut_generique_id = 1;
-            $action = " a désactivé un rendezvous de : {{$rendezvou->reference}}." ;
-            session()->flash('message', 'Le rendez vous a bien été désactivé.');
-        }else{
-            $rendezvou->statut_generique_id = 2;
-            $action = " a procédé à la l'activation d'un rendezvous  de  : {{$rendezvou->reference}}." ;
-            session()->flash('message', 'Le rendezvous a bien été activé.');
+        // if ($rendezvou->statut_generique_id == 3){
+        //     $rendezvou->statut_generique_id = 4;
+        //     $action = " le rendezvous  : {{$rendezvou->reference}}. est en cours" ;
+        //     session()->flash('message', 'Le rendez vous a bien en cours.');
+        // }else{
+        //     $rendezvou->statut_generique_id = 3;
+        //     $action = " a procédé à la l'attente d'un rendezvous  de  : {{$rendezvou->reference}}." ;
+        //     session()->flash('message', 'Le rendezvous a bien été en attente.');
+        // }
+        // $rendezvou->save();
+
+        if ($rendezvou->statut_generique_id == 3){
+            $rendezvou->statut_generique_id = 8;
+            $action = " le rendezvous  : {{$rendezvou->reference}}. est terminé  " ;
+            session()->flash('message', 'Le rendez vous a bien  terminé.');
+            // $action = " le rendezvous  : {{$rendezvou->reference}}. est en cours" ;
+            // session()->flash('message', 'Le rendez vous a bien en cours.');
+        }elseif ($rendezvou->statut_generique_id == 8) {
+            $rendezvou->statut_generique_id = 4;
+             $action = " le rendezvous  : {{$rendezvou->reference}}. est en cours" ;
+            session()->flash('message', 'Le rendez vous a bien en cours.');
+            // $action = " le rendezvous  : {{$rendezvou->reference}}. est repporté " ;
+            // session()->flash('message', 'Le rendez vous a bien  repporté .');
+        }elseif ($rendezvou->statut_generique_id == 4) {
+            $rendezvou->statut_generique_id = 5;
+            $action = " le rendezvous  : {{$rendezvou->reference}}. est repporté " ;
+            session()->flash('message', 'Le rendez vous a bien  repporté .');
+            // $action = " le rendezvous  : {{$rendezvou->reference}}. est annulé  " ;
+            // session()->flash('message', 'Le rendez vous a bien  annulé .');
+        }elseif ($rendezvou->statut_generique_id == 5) {
+            $rendezvou->statut_generique_id = 6;
+             $action = " le rendezvous  : {{$rendezvou->reference}}. est annulé  " ;
+            session()->flash('message', 'Le rendez vous a bien  annulé .');
+
+        }else {
+            $rendezvou->statut_generique_id = 7;
+             $action = " le rendezvous  : {{$rendezvou->reference}}. est effectué  " ;
+            session()->flash('message', 'Le rendez vous a bien  effectué.');
         }
         $rendezvou->save();
 

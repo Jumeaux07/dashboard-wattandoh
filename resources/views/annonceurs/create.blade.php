@@ -63,6 +63,7 @@
                     </div>
 
 
+
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Mot de passe  <span class="text-danger" >*</span> </label>
                         <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="XXXXXXX">

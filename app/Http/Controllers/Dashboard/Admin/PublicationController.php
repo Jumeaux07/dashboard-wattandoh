@@ -19,14 +19,14 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
 class PublicationController extends Controller
-{public function __construct()
+{ public function __construct()
     {
         $this->middleware('admin');
 
-        View::share("module","Module Affichage");
-        View::share("title","Gestion des Affichages");
+        View::share("module","Module Rubriques");
+        View::share("title","Gestion des Rubriques");
 
-        View::share( 'menu', "Affichages" );
+        View::share( 'menu', "Rubriques" );
     }
     /**
      * Display a listing of the resource.
@@ -194,8 +194,10 @@ class PublicationController extends Controller
     public function show($id)
     {
         //
-        $data['publication'] = Publication::where('id', $id)->with('images')->first();
+        // $data['publication'] = Publication::where('id', $id)->with('images')->first();
         // dd($data['publication'] = Publication::where('id', $id)->with('images')->first());
+
+        $data['publication'] = Publication::where('id', $id)->with('images')->find($id);
 
         $data['subtitle'] = "Detail d'une Publication";
 
@@ -205,7 +207,7 @@ class PublicationController extends Controller
             $action = " a affiché la page de detail d'une publication : {{$data['publication']->reference}} ";
             UserActivity::saveActivity($module,$action);
             // $images =  Image::where('id', $id)->with('url');
-            return view('publications.show', $data); //, compact('images')
+            return view('publications.show', $data, ); //, compact('images')
         }else{
             session()->flash('type','alert-danger');
             session()->flash('message',"publication introuvable");

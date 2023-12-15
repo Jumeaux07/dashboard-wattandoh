@@ -13,11 +13,11 @@
                 </ol>
             </div>
         </div>
-        {{-- <div class="col-md-4 col-lg-4">
+         <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
-                <a href="{{route('communes.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter une commune </button></a>
+                <a href="{{route('typedebiens.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un bien </button></a>
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>
 <!-- End Breadcrumbbar -->

@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
-                <a href="{{route('marches.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un Marché </button></a>
+                {{-- <a href="{{route('marches.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un Marché </button></a> --}}
             </div>
         </div>
     </div>
@@ -24,6 +24,45 @@
 
  <!-- Start Contentbar -->
  <div class="contentbar">
+
+    <div class="col-lg-12" style="position: absolue;">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div id="nestable-menu" class="button-list text-center mt-2">
+
+                    <a href="{{route('marches.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un Marché </button></a>
+
+                    {{-- <button type="button" class="btn btn-danger-rgba" data-action="replace-item">Exporter</button> --}}
+
+
+
+                    <form action="{{ Route('marchestrier.index') }}" method="GET" >
+
+                        <div class="row">
+
+
+
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Statut <span class="text-danger" >*</span></label>
+                                <select name="statut_generique" id=""class="form-control" id="exampleInputPassword1">
+                                    <option value="">Tous</option>
+                                    <option value="4">en Cours</option>
+                                    <option value="1">Perdu</option>
+                                    <option value="2">Conclu</option>
+
+
+
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <button type="submit" class="btn btn-primary-rgba" data-action="expand-all">Recherche Trier </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="card m-b-30">
             <div class="card-header">
                 <h5 class="card-title">{{ $subtitle ?? '' }}</h5>
@@ -36,8 +75,8 @@
                         <tr>
                             <th>Reference</th>
                             {{-- <th>date</th> --}}
-                            <th>publication_id</th>
-                            <th>client_id</th>
+                            <th>publication</th>
+                            <th>client / tel</th>
                             <th>rendezvous_id</th>
                             <th>Statut</th>
                             <th>Date de creation</th>
@@ -49,13 +88,15 @@
                                 <tr>
                                     <td>{{$marche->reference}}</td>
                                     {{-- <td>{{$marche->date}}</td> --}}
-                                    <td>{{$marche->publication->description}}</td>
-                                    <td>{{$marche->client->nom_prenoms}}</td>
+                                    <td>{{$marche->publication->reference}}</td>
+                                    <td>{{$marche->client->nom_prenoms}} / {{$marche->client->phone1}}</td>
                                     <td>{{$marche->rendezvous_id}}</td>
-                                    @if ($marche->statut_generique_id == 2)
-                                        <td><span class="badge badge-success">Actif</span></td>
+                                    @if ($marche->statut_generique_id == 4)
+                                        <td><span class="badge badge-primary">en cours</span></td>
+                                    @elseif ($marche->statut_generique_id == 2)
+                                        <td><span class="badge badge-success">Conclu</span></td>
                                     @elseif ($marche->statut_generique_id == 1)
-                                        <td><span class="badge badge-danger">Désactivé</span></td>
+                                        <td><span class="badge badge-danger">Perdu</span></td>
                                     @endif
                                     <td>{{date('d-m-Y à H:i', strtotime($marche->created_at))}}</td>
                                     <td>
@@ -69,11 +110,11 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="{{route('marches.show',$marche->id )}}"> <i class="feather icon-eye"></i> Voir</a>
                                                     <a class="dropdown-item" href="{{route('marches.edit', $marche->id)}}"> <i class="feather icon-edit" ></i> Modifier</a>
-                                                    @if ($marche->statut_generique_id == 2)
-                                                    <a class="dropdown-item" href="{{route('marche.statutMarche',$marche->id )}}"> <i class="fa fa-toggle-off"></i> Desactiver</a>
+                                                    @if ($marche->statut_generique_id == 4)
+                                                    <a class="dropdown-item" href="{{route('marche.statutMarche',$marche->id )}}"> <i class="fa fa-toggle-off"></i> Perdu</a>
                                                     @endif
                                                     @if ($marche->statut_generique_id == 1)
-                                                    <a class="dropdown-item" href="{{route('marche.statutMarche',$marche->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
+                                                    <a class="dropdown-item" href="{{route('marche.statutMarche',$marche->id )}}"> <i class="fa fa-toggle-on"></i> Conclu</a>
                                                     @endif
                                                 </div>
                                             </div>

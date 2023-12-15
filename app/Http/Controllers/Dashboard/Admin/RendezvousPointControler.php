@@ -1,49 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin\trier;
+namespace App\Http\Controllers\Dashboard\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
+use App\Models\Rapport;
+use App\Models\Rendezvous;
 use App\Models\UserActivity;
-// use App\Models\StatutGenerique;
-use App\Models\Client;
-class ClientTrierController extends Controller
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+
+class RendezvousPointControler extends Controller
 {
     public function __construct()
     {
         $this->middleware('admin');
 
-        View::share("module","Module utilisateur");
-        View::share("title","Gestion des utilisateurs");
+        View::share("module","Module Rapport");
+        View::share("title","Gestion des Rapports");
 
-        View::share( 'menu', "Utilisateurs" );
+        View::share( 'menu', "Rapports" );
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $data['subtitle'] = "Liste des Clients";
-        $module = "Module Utilisateur ";
-        $action = " a consulté la liste des clients";
-        UserActivity::saveActivity($module,$action);
-        $sexe =  $request->input('sexe');
-        $statut_generique_id = $request ->input('statut_generique');
-        $query = Client::with(['statut_generique']);
-        if ($sexe) {
-            $query->where('sexe', $sexe);
-        }
-        if ($statut_generique_id) {
-            $query->whereHas('statut_generique', function($query) use ($statut_generique_id){
-                $query->where('id', $statut_generique_id);
-            });
-        }
-        $clients = $query->get();
-        return view('clients.index',$data, compact('clients'));
+        $data['subtitle'] = "Listes des Rapports des Rendez vous";
+        $module = " Module Rapport";
+        $action =  " a consulter la Liste des Rapports des Rendez vous ";
+        UserActivity::saveActivity('$module' ,' $action');
+        $data['rendezvous'] = Rendezvous::all();
+        $data['subtitle'] =  "Listes des Rapports des Rendez vous";
+        $rapports = Rapport::all();
+        return view('pointrendezvous.index', $data, compact('rapports'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Client;
+use App\Models\Annonceur;
 use App\Models\Publication;
 use App\Models\StatutGenerique;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,9 @@ class Rendezvous extends Model
         'date',
         'publication_id',
         'client_id',
+
+        'annonceur_id',
+
         'statut_generique_id',
         'created_by',
     ];
@@ -29,6 +33,12 @@ class Rendezvous extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function annonceur()
+    {
+        return $this->belongsTo(Annonceur::class);
+    }
+
     public function publication()
     {
         return $this->belongsTo(Publication::class);

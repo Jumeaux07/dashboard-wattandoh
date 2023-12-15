@@ -39,6 +39,8 @@
                         <label for="exampleInputEmail1">url  <span class="text-danger" >*</span> </label>
                         <input type="file" name="url" value="{{old('url')}}" class="form-control" id="image"  placeholder="Ex: image(.png , .jpg ) " accept="image/*" >
                         <img id="imagePreview" src="" alt="{{old('url')}}"  class="img-fluid rounded-carre">
+                       {{-- <input type="image" src="" alt=""> --}}
+                        <video id="imagePreview" src="" alt="{{old('url')}}"  class="img-fluid rounded-carre"></video>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Reference de la  Publication <span class="text-danger" >*</span> </label>

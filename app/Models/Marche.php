@@ -40,6 +40,9 @@ class Marche extends Model
     public function rdv(){
         return $this->belongsTo(Rendezvous::class,'rendezvous_id','id');
     }
+    // public function rdv(){
+    //     return $this->belongsTo(Rendezvous::class);
+    // }
     public function rapports(){
         return $this->hasMany(Rapport::class);
     }

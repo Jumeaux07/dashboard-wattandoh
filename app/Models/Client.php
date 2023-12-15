@@ -53,8 +53,11 @@ class Client extends Model
         return $this->hasMany(Marche::class);
     }
 
+    // public function rdv(){
+    //     return $this->belongsToMany(Rendezvous::class,'rendezvouses');
+    // }
     public function rdv(){
-        return $this->belongsToMany(Rendezvous::class,'rendezvouses');
+        return $this->hasMany(Rendezvous::class);
     }
 
     // Rest omitted for brevity

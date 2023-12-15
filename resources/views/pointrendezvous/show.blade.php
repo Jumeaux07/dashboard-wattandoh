@@ -26,7 +26,7 @@
  <div class="contentbar">
     <div class="card">
         <div class="container">
-            <h1>Profil bien </h1>
+            <h1>Profil Rendez Vous</h1>
             <hr>
 
             <div class="row">
@@ -36,11 +36,11 @@
                 </div> --}}
                 <div class="col-md-8">
                     <!-- Informations utilisateur -->
-                    <h3>{{$typedebien->libelle}}</h3>
-                    {{-- <p>Numero de Telephone 1 : {{$client->phone1}}</p>
-                    <p>Numero de Telephone 2 : {{$client->phone2}}</p> --}}
-                    {{-- <p>Sexe: {{$client->sexe}}</p> --}}
-                    {{-- <p>Description : Compte client.</p> --}}
+                    {{-- <h3>{{$client->nom_prenoms}}</h3> --}}
+                    <p>Reference : {{$rendezvou->reference}}</p>
+                    <p>Date  : {{$rendezvou->date}}</p>
+                    {{-- <p>Sexe: {{$client->sexe}}</p>
+                    <p>Description : Compte client.</p> --}}
                 </div>
             </div>
 
@@ -49,12 +49,12 @@
                     <!-- Autres informations ou sections de la page de profil -->
                     <h3>Actions</h3>
                     <p>
-                        <a href="{{route('typedebiens.edit',$typedebien->id)}}"><button class="btn btn-primary"><i class="feather icon-edit" ></i> <strong>Editer</strong> </button></a>
-                        @if ($typedebien->statut_generique_id == 2)
-                        <a href="{{route('typedebien.statutTypedebien',$typedebien->id )}}"><button class="btn btn-danger"><i class="fa fa-toggle-off"></i> <strong>Desactiver</strong></button></a>
+                        <a href="{{route('rendezvous.edit',$rendezvou->id)}}"><button class="btn btn-primary"><i class="feather icon-edit" ></i> <strong>Editer</strong> </button></a>
+                        @if ($rendezvou->statut_generique_id == 2)
+                        <a href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"><button class="btn btn-danger"><i class="fa fa-toggle-off"></i> <strong>Desactiver</strong></button></a>
                         @endif
-                        @if ($typedebien->statut_generique_id == 1)
-                        <a href="{{route('typedebien.statutTypedebien',$typedebien->id )}}"><button class="btn btn-success"><i class="fa fa-toggle-on"></i> <strong>Activer</strong></button></a>
+                        @if ($rendezvou->statut_generique_id == 1)
+                        <a href="{{route('rendezvous.statutRendezvous',$rendezvou->id )}}"><button class="btn btn-success"><i class="fa fa-toggle-on"></i> <strong>Activer</strong></button></a>
                         @endif
                     </p>
                 </div>

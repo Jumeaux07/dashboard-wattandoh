@@ -30,13 +30,13 @@
         </div>
         <div class="card-body">
             <h6 class="card-subtitle">Les champs qui sont marqués par ( <span class="text-danger" >*</span> ) sont  obigatoires</h6>
-            <form action="{{route('communes.update', $commune->id)}}" method="post" >
+            <form action="{{route('typedebiens.update', $typedebien->id)}}" method="post" >
                 @method('put')
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Commune  <span class="text-danger" >*</span> </label>
-                        <input type="text" name="libelle" value="{{$commune->libelle}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Kouassi Yves">
+                        <input type="text" name="libelle" value="{{$typedebien->libelle}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: Kouassi Yves">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
 

@@ -6,9 +6,10 @@ use App\Models\User;
 use App\Models\Commune;
 use App\Models\Rapport;
 use App\Models\Quartier;
-use App\Models\Parrainage;
+// use App\Models\Parrainage;
 use App\Models\Publication;
 use App\Models\StatutGenerique;
+use App\Models\Rendezvous;
 // use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
@@ -27,12 +28,12 @@ class Annonceur extends  Model
         'phone1',
         'phone2',
         'sexe',
-        // 'parrain',
+        'parrain',
         'password',
         'user_id',
         'quartier_id',
         'commune_id',
-        'parrainage_id',
+        // 'parrainage_id',
         'statut_generique_id',
         'created_by',
 
@@ -41,9 +42,9 @@ class Annonceur extends  Model
     public function statut_generique(){
         return $this->belongsTo(StatutGenerique::class);
     }
-    public function parrainage(){
-        return $this->belongsTo(Parrainage::class);
-    }
+    // public function parrainage(){
+    //     return $this->belongsTo(Parrainage::class);
+    // }
 
     public function quartier(){
         return $this->belongsTo(Quartier::class);
@@ -63,6 +64,13 @@ class Annonceur extends  Model
     public function rapports(){
         return $this->hasMany(Rapport::class);
     }
+    // public function rdv(){
+    //     return $this->belongsToMany(Rendezvous::class,'rendezvouses');
+    // }
+    public function rdv(){
+        return $this->hasMany(Rendezvous::class);
+    }
+
 
     protected $hidden = [
         'password'

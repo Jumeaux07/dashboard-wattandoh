@@ -13,11 +13,11 @@
                 </ol>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
+        {{-- <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
                 <a href="{{route('clients.create')}}"><button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Ajouter un client</button></a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <!-- End Breadcrumbbar -->
@@ -155,6 +155,7 @@
                                                     @if ($client->statut_generique_id == 1)
                                                     <a class="dropdown-item" href="{{route('client.cliStatut',$client->id )}}"> <i class="fa fa-toggle-on"></i> Activer</a>
                                                     @endif
+                                                    <a class="dropdown-item" href="{{route('client.rendezvousParClient',$client->id )}}"> <i class="fa fa-calendar-o"></i> Rendezvous</a>
                                                 </div>
                                             </div>
                                         </div>

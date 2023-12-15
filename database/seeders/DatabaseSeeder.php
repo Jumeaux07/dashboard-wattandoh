@@ -17,7 +17,7 @@ use Database\Seeders\RapportSeeder;
 use Database\Seeders\InterditSeeder;
 use Database\Seeders\QuartierSeeder;
 use Database\Seeders\AnnonceurSeeder;
-use Database\Seeders\ParrainageSeeder;
+// use Database\Seeders\ParrainageSeeder;
 use Database\Seeders\RendezvousSeeder;
 use Database\Seeders\TypeDeBienSeeder;
 use Database\Seeders\PublicationSeeder;
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             InterditSeeder::class,
             RoleSeeder::class,
             StatutGenerateSeeder::class,
-            ParrainageSeeder::class,
+            // ParrainageSeeder::class,
             UserActivitySeeder::class,
             TypeDeMarcheSeeder::class,
             UserSeeder::class,

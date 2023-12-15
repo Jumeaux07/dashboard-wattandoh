@@ -128,13 +128,14 @@ class AnnonceurController extends Controller
         $annonceur->phone1 = htmlspecialchars($request->phone1);
         $annonceur->phone2 = htmlspecialchars($request->phone2);
         $annonceur->sexe = htmlspecialchars($request->sexe);
+        $annonceur->parrain = "Aucun";
         // $annonceur->parrain = htmlspecialchars($request->parrain);
-
+        // dd($annonceur->parrain );
         // $annonceur->parrain = boolValue($request->parrain);
         $annonceur->password = Hash::make($request->password);
         // $annonceur->role_id = 1;
         $annonceur->statut_generique_id = 2;
-        $annonceur->parrainage_id = 3;
+        // $annonceur->parrainage_id = 3;
         // $annonceur->statut_generique_id = 4;
         $annonceur->created_by = auth()->user()->nom_prenoms;
 
@@ -236,7 +237,7 @@ class AnnonceurController extends Controller
             $annonceur->phone1 =  htmlspecialchars($request->phone1);
             $annonceur->phone2 =  htmlspecialchars($request->phone2);
             $annonceur->sexe =  htmlspecialchars($request->sexe);
-            // $annonceur->parrain =  htmlspecialchars($request->parrain);
+            $annonceur->parrain =  htmlspecialchars($request->parrain);
 
             if($annonceur->save()){
                 session()->flash('type','alert-success');
@@ -291,8 +292,7 @@ class AnnonceurController extends Controller
         return redirect()->back();
     }
 
-
-    public function ParrainA( $id){
+    public function parrainage($id){
         $annonceur = Annonceur::find($id);
         if (!$annonceur){
             session()->flash('type', 'alert-danger');
@@ -300,36 +300,63 @@ class AnnonceurController extends Controller
             return back();
         }
         $module = 'Module utilisateur';
+        if ($annonceur->parrain = "Aucun") {
 
-        if ($annonceur->parrainage_id == 3) {
-            $annonceur->parrainage_id = 1;
-            $action  = " l'annonceur : {{$annonceur->nom_prenoms}} est  parrainé  ";
-            session()->flash('message', 'l\'annonceur  est  parainé ');
-        }elseif ($annonceur->parrainage_id == 1) {
+            $annonceur->parrain = "Parrain";
+            $action  = " l'annonceur : {{$annonceur->nom_prenoms}} est  parrain  ";
+            session()->flash('message', 'l\'annonceur  est  parain ');
+        }else{
 
-            $annonceur->parrainage_id = 2;
-            $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
-            session()->flash('message', 'L\' annonceur  est un parrain');
+            $annonceur->parrain = "Aucun";
+            $action = "L 'annonceur : {{$annonceur->nom_prenoms}} a le statut  aucun ";
+            session()->flash('message', 'l\annonceur a le statut  Aucun ');
 
-            // $annonceur->parrainage_id = 3;
-            // $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
-            // session()->flash('message', 'l\annonceur est Aucun ');
         }
-        else {
-        //     // $annonceur->parrainage_id = 2;
-        //     // $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
-        //     // session()->flash('message', 'L\' annonceur  est un parrain');
-            $annonceur->parrainage_id = 3;
-            $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
-            session()->flash('message', 'l\annonceur est Aucun ');
-        }
-
-        $annonceur->save();
+       $annonceur->save();
 
         UserActivity::saveActivity($module,$action);
         session()->flash('type', 'alert-success');
         return redirect()->back();
+
     }
+    // public function ParrainA( $id){
+    //     $annonceur = Annonceur::find($id);
+    //     if (!$annonceur){
+    //         session()->flash('type', 'alert-danger');
+    //         session()->flash('message', 'L\'annonceur est introuvable.');
+    //         return back();
+    //     }
+    //     $module = 'Module utilisateur';
+
+    //     if ($annonceur->parrainage_id == 3) {
+    //         $annonceur->parrainage_id = 1;
+    //         $action  = " l'annonceur : {{$annonceur->nom_prenoms}} est  parrainé  ";
+    //         session()->flash('message', 'l\'annonceur  est  parainé ');
+    //     }elseif ($annonceur->parrainage_id == 1) {
+
+    //         $annonceur->parrainage_id = 2;
+    //         $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
+    //         session()->flash('message', 'L\' annonceur  est un parrain');
+
+    //         // $annonceur->parrainage_id = 3;
+    //         // $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
+    //         // session()->flash('message', 'l\annonceur est Aucun ');
+    //     }
+    //     else {
+    //     //     // $annonceur->parrainage_id = 2;
+    //     //     // $action = " a rendu parain l annonceur : {{$annonceur->nom_prenoms}}.";
+    //     //     // session()->flash('message', 'L\' annonceur  est un parrain');
+    //         $annonceur->parrainage_id = 3;
+    //         $action = "L 'annonceur : {{$annonceur->nom_prenoms}} est aucun ";
+    //         session()->flash('message', 'l\annonceur est Aucun ');
+    //     }
+
+    //     $annonceur->save();
+
+    //     UserActivity::saveActivity($module,$action);
+    //     session()->flash('type', 'alert-success');
+    //     return redirect()->back();
+    // }
 
 
     // public function indexA(Request $request ,$id)
@@ -362,6 +389,20 @@ class AnnonceurController extends Controller
     //     //  $data['annonceurs'] = Annonceur::all();
     //     return view('annonceurs.index', compact('annonceurs'));
     // }
+    public function PublicationParAnnonceur($id){
+        $data['subtitle'] = "Liste des Publication d'un annonceur";
+
+        //pour l'activité méné par l'utilisateur connecté
+        $module = "Module Utilisateur ";
+        $action = " a consulté la liste des Publication  d'un Annonceur";
+        UserActivity::saveActivity($module,$action);
+        // recupere l'annonceur et ses rendez vouus
+        $annonceur = Annonceur::with('publications')->findOrFail($id);
+
+        // Retourne vers la view de l'affichage des rendezvous des annonceur
+        return view('annonceurs.pub', ['annonceur'=> $annonceur], $data);
+    }
+
 
 
 }

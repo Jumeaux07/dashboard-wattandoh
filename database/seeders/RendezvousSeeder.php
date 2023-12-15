@@ -21,7 +21,8 @@ class RendezvousSeeder extends Seeder
         'date'=> now(),
         'publication_id'=>1,
         'client_id'=>1,
-        'statut_generique_id'=>1,
+        'annonceur_id'=>1,
+        'statut_generique_id'=>3,
         'created_by'=>"Wattandoh",
         ]);
     }

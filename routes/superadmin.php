@@ -1,29 +1,36 @@
 <?php
 
-use App\Models\Quartier;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\Admin\OtpController;
+use App\Http\Controllers\Dashboard\Admin\CodeController;
 use App\Http\Controllers\Dashboard\Admin\ImageController;
 use App\Http\Controllers\Dashboard\Admin\BudgetController;
 use App\Http\Controllers\Dashboard\Admin\ClientController;
 use App\Http\Controllers\Dashboard\Admin\MarcheController;
 use App\Http\Controllers\Dashboard\Admin\CommuneController;
 use App\Http\Controllers\Dashboard\Admin\RapportController;
+use App\Http\Controllers\Dashboard\Admin\InterditController;
 use App\Http\Controllers\Dashboard\Admin\QuartierController;
 use App\Http\Controllers\Dashboard\Admin\AnnonceurController;
 use App\Http\Controllers\Dashboard\Admin\RendezvousController;
 use App\Http\Controllers\Dashboard\Admin\TypedebienController;
+
+use App\Http\Controllers\Dashboard\Admin\trier\ClientTrierController;
 use App\Http\Controllers\Dashboard\Admin\PublicationController;
 use App\Http\Controllers\Dashboard\Admin\GestionnaireController;
-use App\Http\Controllers\Dashboard\Admin\AdministrateurController;
-use App\Http\Controllers\Dashboard\Admin\AnnonceurTrierController;
-use App\Http\Controllers\Dashboard\Admin\ClientTrierController;
-use App\Http\Controllers\Dashboard\Admin\InterditController;
-use App\Http\Controllers\Dashboard\Admin\OtpController;
 use App\Http\Controllers\Dashboard\Admin\TypedemarcheController;
-use App\Http\Controllers\Dashboard\Admin\CodeController;
-use App\Http\Controllers\Dashboard\Admin\GestionnaireTrierController;
+
+use App\Http\Controllers\Dashboard\Admin\AdministrateurController;
+use App\Http\Controllers\Dashboard\Admin\processus\ProcessClientController;
+use App\Http\Controllers\Dashboard\Admin\RendezvousPointControler;
+use App\Http\Controllers\Dashboard\Admin\trier\AnnonceurTrierController;
+use App\Http\Controllers\Dashboard\Admin\trier\GestionnaireTrierController;
+use App\Http\Controllers\Dashboard\Admin\trier\MarcheTrierControler;
 use App\Http\Controllers\Dashboard\Admin\trier\PublicationTrierController;
+use App\Http\Controllers\Dashboard\Admin\trier\RendezvousTrierControler;
+use App\Models\Annonceur;
 
 // use App\Models\Commune;
 // use App\Models\Publication;
@@ -46,18 +53,25 @@ Route::prefix('admin')->group(function () {
     //activer un annonceurs
     // Route::get('statut/{id}',[AnnonceurController::class,'statut'])->name('annonceur.anStatut');
     Route::get('statutA/{id}',[AnnonceurController::class,'statutA'])->name('annonceur.statutA');
+    Route::get('/annonceurs/{annonceurId}/publications',[AnnonceurController::class,'PublicationParAnnonceur'])->name('annonceur.PublicationParAnnonceur');
+
+    Route::get('/annonceurs/{annonceurId}/rendezvous',[ProcessClientController::class,'rendezvousParAnnonceur'])->name('annonceur.rendezvousParAnnonceur');
+
+
+    // parrain avec champs
+    Route::get('parrainage/{id}', [AnnonceurController::class, 'parrainage'])->name('annonceur.parrainage');
     // route de triage de annonceurs
     // Route::get('annonceurtrier',[AnnonceurController::class,'indexA'])->name('annonceur.indexA');
 
     // route de parrainage d'un annonceurs
-    Route::get('ParrainA/{id}',[AnnonceurController::class,'ParrainA'])->name('annonceur.ParrainA');
+    // Route::get('ParrainA/{id}',[AnnonceurController::class,'ParrainA'])->name('annonceur.ParrainA');
 
     // ONGLES CLIENTS
     Route::resource('clients',ClientController::class);
 
     // activer un client
     Route::get('statutC/{id}',[ClientController::class,'statut'])->name('client.cliStatut');
-
+    Route::get('/clients/{clientId}/rendezvous',[ClientController::class,'rendezvousParClient'])->name('client.rendezvousParClient');
     // ONgles gestionnaire
     Route::resource('gestionnaires',GestionnaireController::class);
      // activer les gestionnaires
@@ -115,6 +129,13 @@ Route::prefix('admin')->group(function () {
      // code Qr
      Route::resource('codeQR', CodeController::class);
 
+    /*  ---------------------------------------------------------------------------------------
+            les routes du module RAPPORTS (rapport rendez vous, rapport marches et Recus)
+        ---------------------------------------------------------------------------------------
+     */
+     // route des Rapports des rendez vous
+    Route::resource('pointrendezvous', RendezvousPointControler::class);
+
 
      /*  -------------------------------------------------------------------
          les route des  triage en fonction des element selectionner:
@@ -124,4 +145,17 @@ Route::prefix('admin')->group(function () {
      Route::resource('clienttrier', ClientTrierController::class);
      Route::resource('gestionnairetrier', GestionnaireTrierController::class);
      Route::resource('publicationtrier', PublicationTrierController::class);
+     Route::resource('rendezvoustrier',RendezvousTrierControler::class);
+     Route::resource('marchestrier', MarcheTrierControler::class);
+
+
+
+        /*  -------------------------------------------------------------------
+         les routes d'affichage des rendez vous en fonction (annonceurs/ clients):
+         -------------------------------------------------------------------
+     */
+    // Route::get('', [ProcessClientController::class, '']);
+
+
+
 });

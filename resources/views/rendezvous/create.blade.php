@@ -43,7 +43,7 @@
                     <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1"> reference Pulication  <span class="text-danger" >*</span> </label>
                         {{-- <input type="number" name="publication_id" value="{{old('publication_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
-                        <select name="publication_id" class="form-control" id="exampleInputEmail1" >
+                        <select name="publication_id" class="form-control" id="publication" >
                             @foreach ($publications as $publication )
                             <option value="{{ $publication->id }}">{{ $publication->reference }}</option>
                             @endforeach
@@ -64,8 +64,20 @@
                     </div>
 
                     <div class="form-group col-sm-6">
+                        <label for="exampleInputEmail1">Annonceur <span class="text-danger" >*</span> </label>
+                        {{-- <input type="number" name="client_id" value="{{old('client_id')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 9999999999"> --}}
+                        <select name="annonceur_id" class="form-control" id="annonceur" >
+                            @foreach ($annonceurs as $annonceur )
+                            <option value="{{ $annonceur ->id }}">{{ $annonceur->nom_prenoms }}</option>
+
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-6">
                         <label for="exampleInputEmail1">Date  <span class="text-danger" >*</span> </label>
-                        <input type="date" name="date" value="{{old('date')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: date">
+                        <input type="datetime-local" name="date" value="{{old('date')}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: date">
 
                     </div>
 
@@ -77,4 +89,36 @@
         </div>
     </div>
  </div>
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const publicationSelect = document.getElementById('publication');
+        const annonceurSelect = document.getElementById('annonceur');
+        publicationSelect.addEventListener("change", function(){
+            const selectedPublicationId = publicationSelect.value;
+
+            // desactiver le menu deroulant des quartiers si aucune commune n'a ete selectionne
+            annonceurSelect.disabled = !selectedPublicationId;
+            // efface  les options  precedentes
+            annonceurSelect.innerHTML = "";
+            if (selectedPublicationId) {
+                 // Chargez les quartiers en fonction de la commune sélectionnée
+                 @foreach($annonceurs as $annonceur)
+                    if ({{ $annonceur->publication_id }} == selectedPublicationId) {
+                        const option = document.createElement("option");
+                        option.value = {{ $annonceur->id }};
+                        option.text = "{{ $annonceur->nom_prenoms }}";
+                        annonceurSelect.appendChild(option);
+                    }
+                @endforeach
+
+            }else {
+                // Si aucune commune n'est sélectionnée, affichez un message
+                const option = document.createElement("option");
+                option.text = "Sélectionnez d'abord une reference de publication";
+                quartierSelect.appendChild(option);
+            }
+        });
+    });
+ </script>
 @endsection

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Dashboard\Admin\trier;
 
 use App\Http\Controllers\Controller;
 use App\Models\Annonceur;
@@ -34,10 +34,11 @@ class AnnonceurTrierController extends Controller
         $action = " a consulté la liste des annonceurs";
         UserActivity::saveActivity($module,$action);
         $sexe =  $request->input('sexe');
+        $parrain =  $request->input('parrain');
         $statut_generique_id = $request ->input('statut_generique');
-        $parrainage_id = $request->input('parrainage');
+        // $parrainage_id = $request->input('parrainage');
 
-        $query = Annonceur::with(['statut_generique', 'parrainage']);
+        $query = Annonceur::with(['statut_generique']);
         if ($sexe) {
             $query->where('sexe', $sexe);
         }
@@ -46,11 +47,14 @@ class AnnonceurTrierController extends Controller
                 $query->where('id', $statut_generique_id);
             });
         }
-        if ($parrainage_id) {
-            $query->whereHas('parrainage', function($query) use ($parrainage_id){
-                $query->where('id', $parrainage_id);
-            });
+        if ($parrain) {
+            $query->where('parrain', $parrain);
         }
+        // if ($parrainage_id) {
+        //     $query->whereHas('parrainage', function($query) use ($parrainage_id){
+        //         $query->where('id', $parrainage_id);
+        //     });
+        // }
          $annonceurs = $query->get();
         //  $parrainages = Parrainage::all();
         //  $parrainages = Parrainage::all();
